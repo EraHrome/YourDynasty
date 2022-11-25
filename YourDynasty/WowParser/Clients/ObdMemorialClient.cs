@@ -22,10 +22,6 @@ namespace WowPersonParser.Clients
         {
             string content = string.Empty;
 
-            var message = new HttpRequestMessage(HttpMethod.Get, $"{_baseUri}{_searchPath}?{BuildQueryString(personRequest)}") { Version = new Version(2, 0) };
-            var request = await _httpClient.SendAsync(message);
-
-
             var searchResponse = await _httpClient.GetAsync($"{_baseUri}{_searchPath}?{BuildQueryString(personRequest)}");
             if (searchResponse?.IsSuccessStatusCode ?? false)
             {
