@@ -27,7 +27,7 @@ namespace WowPersonParser
                 {
                     HtmlDocument doc = new();
                     doc.LoadHtml(content);
-                    var nodes = doc.DocumentNode.SelectNodes("//[@class='search-result']");
+                    var nodes = doc.DocumentNode.SelectNodes("//*[@class='row search-result']");
                     foreach (var node in nodes)
                     {
                         var infoContent = await _obdMemorialClient.GetInfo(node.Id);
@@ -36,11 +36,11 @@ namespace WowPersonParser
                             string json = string.Empty;
                             HtmlDocument docInfo = new();
                             docInfo.LoadHtml(content);
-                            var nodeInfos = doc.DocumentNode.SelectNodes("//[@class='card_parameter']");
+                            var nodeInfos = docInfo.DocumentNode.SelectNodes("//*[@class='card_parameter']");
                             foreach (var info in nodeInfos)
                             {
-                                var nameProp = info.SelectSingleNode("//[@class='card_param-title']").InnerText.GetPropName();
-                                var value = info.SelectSingleNode("//[@class='card_param-result']").InnerText;
+                                var nameProp = info.SelectSingleNode("//*[@class='card_param-title']").InnerText.GetPropName();
+                                var value = info.SelectSingleNode("//*[@class='card_param-result']").InnerText;
                                 json += $"\"{nameProp}\":\"{value}\"";
                             }
 
