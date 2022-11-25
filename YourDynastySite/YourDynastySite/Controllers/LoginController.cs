@@ -8,16 +8,24 @@ namespace Forum.Areas.User
     public class LoginController : Controller
     {
         private readonly AuthorizationService _authorizationService;
+        private readonly WowPersonParsers.WowPersonParser _wowPersonParser;
 
-        public LoginController(AuthorizationService authorizationService)
+        public LoginController(
+            AuthorizationService authorizationService,
+            WowPersonParsers.WowPersonParser wowPersonParse)
         {
+            _wowPersonParser = wowPersonParse;
             _authorizationService = authorizationService;
         }
 
         [HttpGet("login")]
-        public IActionResult Index(string? redirect)
+        public async Task<IActionResult> Index(string? redirect)
         {
-            return View((object?)redirect);
+            var res = await _wowPersonParser.GetPersons(new WowPersonParsers.Models.Dtos.PersonRequestDTO
+            {
+                Name = "Никита"
+            });
+            return Ok();
         }
 
         [HttpGet("exit")]

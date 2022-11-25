@@ -23,8 +23,9 @@ services.AddScoped<AuthorizationService>();
 services.AddScoped<IdentityV2PasswordHashService>();
 services.AddScoped<TokenHashSha512Service>();
 services.AddScoped<RegistrationService>();
+services.AddScoped<WowPersonParsers.WowPersonParser>();
 
-builder.Services.AddTransient<IDynastyService, DynastyService>();
+services.AddTransient<IDynastyService, DynastyService>();
 
 var app = builder.Build();
 
