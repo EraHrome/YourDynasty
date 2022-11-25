@@ -1,11 +1,32 @@
 using IO.Swagger.Api;
 using YourDynastySite.Services;
 using YourDynastySite.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Models.Keys;
+using YourDynastySite.Database.Contexts;
+using YourDynastySite.Middlewares;
+using YourDynastySite.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
+var config = builder.Configuration;
+
+services.AddControllersWithViews();
+
+services.AddDbContext<ApplicationContext>(
+    options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
+services.AddAuthentication(AuthentificationKeys.DefaultSchemeName)
+    .AddScheme<DatabaseCookieTokenAuthOptions, DatabaseCookieTokenAuthHandler>
+    (AuthentificationKeys.DefaultSchemeName, opt => { });
+
+services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+services.AddScoped<AuthorizationService>();
+services.AddScoped<IdentityV2PasswordHashService>();
+services.AddScoped<TokenHashSha512Service>();
+services.AddScoped<RegistrationService>();
 
 builder.Services.AddTransient<IDynastyService, DynastyService>();
 
