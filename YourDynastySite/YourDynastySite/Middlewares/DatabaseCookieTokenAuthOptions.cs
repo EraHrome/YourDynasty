@@ -2,9 +2,9 @@
 using YourDynastySite.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Models.Keys;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
+using Models.Keys;
 
 namespace YourDynastySite.Middlewares
 {

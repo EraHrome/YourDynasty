@@ -24,4 +24,8 @@
     <Folder Include="Database\Entities\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\Models\Models.csproj" />
+  </ItemGroup>
+
 </Project>
