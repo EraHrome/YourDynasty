@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{6A3E2FA5-8F18-4FD2-84B8-84537E1A86BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowParser", "WowParser\WowParser.csproj", "{E3357EBE-8A33-4312-B50E-028DC4A870DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowPersonParser", "WowParser\WowPersonParser.csproj", "{E3357EBE-8A33-4312-B50E-028DC4A870DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
