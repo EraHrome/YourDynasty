@@ -50,6 +50,7 @@ namespace YourDynastySite.Services
                             Token = token
                         };
                         await _context.AuthorizationTokens.AddAsync(newToken);
+                        await _context.SaveChangesAsync();
                         return token;
                     }
                 }

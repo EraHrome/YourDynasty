@@ -21,6 +21,7 @@ services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 services.AddScoped<AuthorizationService>();
 services.AddScoped<IdentityV2PasswordHashService>();
 services.AddScoped<TokenHashSha512Service>();
+services.AddScoped<RegistrationService>();
 
 var app = builder.Build();
 
