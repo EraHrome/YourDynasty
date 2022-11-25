@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Models.Keys;
+using YourDynastySite.Database.Contexts;
 
 namespace YourDynastySite.Middlewares
 {
@@ -18,14 +19,14 @@ namespace YourDynastySite.Middlewares
         private readonly DbSet<AuthorizationToken> _dbSet;
 
         public DatabaseCookieTokenAuthHandler(
-            DbSet<AuthorizationToken> tokensDb,
+            ApplicationContext context,
             IOptionsMonitor<DatabaseCookieTokenAuthOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock)
         : base(options, logger, encoder, clock)
         {
-            _dbSet = tokensDb;
+            _dbSet = context.AuthorizationTokens;
         }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()

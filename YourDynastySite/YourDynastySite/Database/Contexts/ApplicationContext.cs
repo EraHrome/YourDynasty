@@ -8,6 +8,11 @@ namespace YourDynastySite.Database.Contexts
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<AuthorizationToken> AuthorizationTokens { get; set; } = null!;
 
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+        {
+
+        }
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseSqlServer("...");
