@@ -20,13 +20,28 @@ namespace WowPersonParser.Clients
 
         public async Task<string> GetList(PersonRequestDTO personRequest)
         {
+            string content = string.Empty;
 
-            return File.ReadAllText("C:\\Users\\filil\\Desktop\\ОБД Мемориал.html");
+            var searchResponse = await _httpClient.GetAsync($"{_baseUri}{_searchPath}?{BuildQueryString(personRequest)}");
+            if (searchResponse?.IsSuccessStatusCode ?? false)
+            {
+                content = await searchResponse.Content.ReadAsStringAsync();
+            }
+
+            return content;
         }
 
         public async Task<string> GetInfo(string id)
         {
-           return File.ReadAllText("C:\\Users\\filil\\Desktop\\ОБД Мемориал __ Полковников Никита Пименович, красноармеец _ Сводная информация о человеке.html");
+            string content = string.Empty;
+
+            var searchResponse = await _httpClient.GetAsync($"{_baseUri}{_infoPath}?id={id}");
+            if (searchResponse?.IsSuccessStatusCode ?? false)
+            {
+                content = await searchResponse.Content.ReadAsStringAsync();
+            }
+
+            return content;
         }
 
         private static string BuildQueryString(PersonRequestDTO personRequest)
