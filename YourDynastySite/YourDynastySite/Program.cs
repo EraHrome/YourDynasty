@@ -1,7 +1,13 @@
+using IO.Swagger.Api;
+using YourDynastySite.Services;
+using YourDynastySite.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IDynastyService, DynastyService>();
 
 var app = builder.Build();
 
