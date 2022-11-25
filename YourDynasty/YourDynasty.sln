@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{6A3E2FA5-8F18-4FD2-84B8-84537E1A86BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{6A3E2FA5-8F18-4FD2-84B8-84537E1A86BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowParser", "WowParser\WowParser.csproj", "{E3357EBE-8A33-4312-B50E-028DC4A870DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WowParser", "WowParser\WowParser.csproj", "{E3357EBE-8A33-4312-B50E-028DC4A870DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynastyService", "..\DynastyService\src\IO.Swagger\DynastyService.csproj", "{DFA14DD1-6BE6-45C7-B62A-D03E9EBCC23D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E3357EBE-8A33-4312-B50E-028DC4A870DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3357EBE-8A33-4312-B50E-028DC4A870DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3357EBE-8A33-4312-B50E-028DC4A870DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFA14DD1-6BE6-45C7-B62A-D03E9EBCC23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA14DD1-6BE6-45C7-B62A-D03E9EBCC23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA14DD1-6BE6-45C7-B62A-D03E9EBCC23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA14DD1-6BE6-45C7-B62A-D03E9EBCC23D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
