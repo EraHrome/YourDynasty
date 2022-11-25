@@ -1,7 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using Models.Keys;
+using YourDynastySite.Database.Contexts;
+using YourDynastySite.Middlewares;
+
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
+var config = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+services.AddAuthentication(AuthentificationKeys.DefaultSchemeName)
+    .AddScheme<DatabaseCookieTokenAuthOptions, DatabaseCookieTokenAuthHandler>
+    (AuthentificationKeys.DefaultSchemeName, opt => { });
 
 var app = builder.Build();
 
