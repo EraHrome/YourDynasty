@@ -1,13 +1,9 @@
-using IO.Swagger.Api;
 using YourDynastySite.Services;
 using YourDynastySite.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models.Keys;
 using YourDynastySite.Database.Contexts;
 using YourDynastySite.Middlewares;
-using YourDynastySite.Services;
-
-var builder = WebApplication.CreateBuilder(args);
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
