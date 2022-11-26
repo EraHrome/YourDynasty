@@ -9,6 +9,10 @@ namespace YourDynastySite.Controllers
     {
         private readonly IDynastyService _dynastyService;
 
+        private const string _dbName = "yourdynasty.com";
+        //private const string _defaultPersonId = "default";
+        private const string _allNames = "all";
+
         public RecognizeController(IDynastyService dynastyService)
         {
             _dynastyService = dynastyService;
@@ -38,6 +42,8 @@ namespace YourDynastySite.Controllers
             foreach (var faceId in facesIds)
             {
                 faces.Add(await _dynastyService.GetCroppedFace(faceId));
+                Guid personId = Guid.NewGuid();
+                await _dynastyService.SetPersonFaces(new List<Guid>() { faceId }, $"{personId}@{_dbName}");
             }
 
             UploadResultViewModel viewModel = new()
@@ -52,14 +58,23 @@ namespace YourDynastySite.Controllers
 
         public async Task<IActionResult> Matches(Guid faceId)
         {
-            Recognize recognize = await _dynastyService.Recognize(new List<Guid>() { faceId });
+            Recognize recognize;
+            try
+            {
+                recognize = await _dynastyService.Recognize(new List<Guid>() { faceId }, new List<string>() { $"{_allNames}@{_dbName}" });
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction(nameof(AddPersonForm), faceId);
+            }
 
             if (recognize?.Results == null || recognize.Results.Count == 0)
             {
                 return RedirectToAction(nameof(AddPersonForm));
             }
 
-            List<Guid> facesIds = recognize.Results.Where(recognize => recognize.FaceUuid.HasValue).Select(face => face.FaceUuid.Value).ToList();
+            List<Guid> facesIds = recognize.Results.Where(recognize => recognize.FaceUuid.HasValue && recognize.FaceUuid == faceId)
+                .FirstOrDefault().Matches.Where(match => match.FaceUuid.HasValue).Select(match => match.FaceUuid.Value).ToList();
 
             List<CroppedFace> faces = new();
             foreach (var face in facesIds)
