@@ -18,7 +18,7 @@ namespace YourDynastySite.Controllers
         private const string _allNames = "all";
 
         public RecognizeController(
-            IDynastyService dynastyService, 
+            IDynastyService dynastyService,
             ApplicationContext context)
         {
             _dynastyService = dynastyService;
@@ -109,9 +109,40 @@ namespace YourDynastySite.Controllers
 
         public async Task<IActionResult> AddPerson(DynastyPerson person)
         {
+            DynastyPerson? dynastyPerson = null;
 
+            if (person.Id != new Guid())
+            {
+                dynastyPerson = _context.DynastyPersons.FirstOrDefault(p => p.Id == person.Id);
+            }
 
-            return View();
+            if (dynastyPerson == null)
+            {
+                person.Id = Guid.NewGuid();
+                await _context.DynastyPersons.AddAsync(person);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Matches), new { faceId = person.FaceId });
+            }
+
+            dynastyPerson.BirthPlace = person.BirthPlace;
+            dynastyPerson.Gender = person.Gender;
+            dynastyPerson.BirthDate = person.BirthDate;
+            dynastyPerson.DeathDate = person.DeathDate;
+            dynastyPerson.SourceLink = person.SourceLink;
+            dynastyPerson.PartnerId = person.PartnerId;
+            dynastyPerson.FaceId= person.FaceId;
+            dynastyPerson.FatherId= person.FatherId;
+            dynastyPerson.MotherId= person.MotherId;
+            dynastyPerson.Name= person.Name;
+            dynastyPerson.Surname= person.Surname;
+            dynastyPerson.MiddleName= person.MiddleName;
+            dynastyPerson.BurialPlace= person.BurialPlace;
+            dynastyPerson.BurialRegion= person.BurialRegion;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Matches), new { faceId = person.FaceId });
         }
 
         public async Task<IActionResult> GenealogyTree(Guid personId)

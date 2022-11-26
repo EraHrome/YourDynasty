@@ -8,13 +8,10 @@ namespace Forum.Areas.User
     public class LoginController : Controller
     {
         private readonly AuthorizationService _authorizationService;
-        private readonly WowPersonParsers.WowPersonParser _wowPersonParser;
 
         public LoginController(
-            AuthorizationService authorizationService,
-            WowPersonParsers.WowPersonParser wowPersonParse)
+            AuthorizationService authorizationService)
         {
-            _wowPersonParser = wowPersonParse;
             _authorizationService = authorizationService;
         }
 
