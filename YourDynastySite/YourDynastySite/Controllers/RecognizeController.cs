@@ -93,7 +93,7 @@ namespace YourDynastySite.Controllers
             foreach (var face in facesIds)
             {
                 CroppedFace croppedFace = await _dynastyService.GetCroppedFace(face);
-                DynastyPerson person = await _context.DynastyPersons.FirstOrDefaultAsync(p => p.FatherId == face);
+                DynastyPerson person = await _context.DynastyPersons.FirstOrDefaultAsync(p => p.FaceId == face);
                 persons.Add((croppedFace, person));
             }
 
