@@ -10,7 +10,6 @@ namespace YourDynastySite.Controllers
         private readonly IDynastyService _dynastyService;
 
         private const string _dbName = "yourdynasty.com";
-        //private const string _defaultPersonId = "default";
         private const string _allNames = "all";
 
         public RecognizeController(IDynastyService dynastyService)
