@@ -67,11 +67,11 @@
       <div class="container">
 			<h3 class="testimonials wrapper">Запрос в архивах:</h3>
             <p>Максимально полно укажите информацию о человеке - наш сервия найдёт совпадения в открытых банках данных. Обратите внимание - не все поля обязательны к заполнению.</p>		
-			 <form class="comments-form">
+			 <form id="memorial-form" class="comments-form">
                     @*@Html.TextBoxFor(x => x.Rang, new { placeholder = "Введите звание", @class = "input" })*@
 					  <div class="multirow">
 						@Html.TextBoxFor(x => x.Name, new { placeholder = "Имя", @class = "input tripleline" })
-                        @Html.TextBoxFor(x => x.Surname, new { placeholder = "Фамилию", @class = "input tripleline" })
+                        @Html.TextBoxFor(x => x.Surname, new { placeholder = "Фамилия", @class = "input tripleline" })
                         @Html.TextBoxFor(x => x.MiddleName, new { placeholder = "Отчество", @class = "input tripleline" })
 					  </div>
 					  <div class="multirow">
@@ -83,6 +83,7 @@
                         @Html.TextBoxFor(x => x.Region, new { placeholder = "Регион захоронения", @class = "input tripleline" })
                         @Html.TextBoxFor(x => x.BurialPlace, new { placeholder = "Место захоронения", @class = "input tripleline" })
 					  </div>
+                      <input id="Page" type="hidden" value="1" />
 					  <input id="form-memorial-submit" type="button" class="btn btn-default-green-fill" value="Искать">
                </form>
       </div>

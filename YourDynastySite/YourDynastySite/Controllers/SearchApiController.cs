@@ -26,10 +26,16 @@ namespace YourDynastySite.Controllers
                 Birthplace = model.Birthplace,
                 Country = model.Country,
                 Region = model.Region,
-                BurialPlace = model.BurialPlace
+                BurialPlace = model.BurialPlace,
+                Page = model.Page != 0 ? model.Page : 1
             });
 
-            return View(new PersonsViewModel() { Persons = res.IsSuccess ? res.Persons : new() });
+            if(model.Page > 1)
+            {
+                return View("~/Views/Search/MemorialPagerList.cshtml", new PersonsViewModel() { Persons = res.Persons ?? new(), Page = model.Page });
+            }
+
+            return View("~/Views/Search/MemorialList.cshtml", new PersonsViewModel() { Persons = res.Persons ?? new(), Page = model.Page });
         }
     }
 }
