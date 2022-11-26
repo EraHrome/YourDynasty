@@ -58,16 +58,16 @@
                                                                     background-color: #aeaeae;
                                                                 }
                                                                 .{randId}.male .bft-edit-form-header, .{randId}.male .bft-img-button{
-                                                                    background-color: #6bb4df;
+                                                                    background-color: #2f3640;
                                                                 }
                                                                 .{randId}.male div.bft-img-button:hover{
-                                                                    background-color: #cb4aaf;
+                                                                    background-color: #ffb142;
                                                                 }
                                                                 .{randId}.female .bft-edit-form-header, .{randId}.female .bft-img-button{
-                                                                    background-color: #cb4aaf;
+                                                                    background-color: #ffb142;
                                                                 }
                                                                 .{randId}.female div.bft-img-button:hover{
-                                                                    background-color: #6bb4df;
+                                                                    background-color: #2f3640;
                                                                 }
                             </style>`;
         FamilyTree.templates.main.node = '<rect x="0" y="0" height="{h}" width="{w}" fill="#ffffff" stroke-width="3" stroke="#ccc" rx="5" ry="5"></rect>' +
@@ -87,23 +87,23 @@
                                <circle id="base_img_0_stroke" fill="#b1b9be" cx="45" cy="62" r="37"/>
                               <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}" x="10" y="26" width="72" height="72"></image>`;
         FamilyTree.templates.main_male = Object.assign({}, FamilyTree.templates.main);
-        FamilyTree.templates.main_male.node = '<rect x="0" y="0" height="{h}" width="{w}" fill="#ffffff" stroke-width="3" stroke="#6bb4df" rx="5" ry="5"></rect>' +
-            '<rect x="0" y="0" height="20" width="{w}" fill="#6bb4df" stroke-width="1" stroke="#6bb4df" rx="5" ry="5"></rect>' +
-            '<line x1="0" y1="20" x2="250" y2="20" stroke-width="5" stroke="#6bb4df"></line>';
+        FamilyTree.templates.main_male.node = '<rect x="0" y="0" height="{h}" width="{w}" fill="#ffffff" stroke-width="3" stroke="#2f3640" rx="5" ry="5"></rect>' +
+            '<rect x="0" y="0" height="20" width="{w}" fill="#2f3640" stroke-width="1" stroke="#2f3640" rx="5" ry="5"></rect>' +
+            '<line x1="0" y1="20" x2="250" y2="20" stroke-width="5" stroke="#2f3640"></line>';
         FamilyTree.templates.main_male.img_0 =
             `<use xlink:href="#base_img_0_stroke" />
-                               <circle id="base_img_0_stroke" fill="#6bb4df" cx="45" cy="62" r="37"/>
+                               <circle id="base_img_0_stroke" fill="#2f3640" cx="45" cy="62" r="37"/>
                               <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}" x="10" y="26" width="72" height="72"></image>`;
         FamilyTree.templates.main_male_child = Object.assign({}, FamilyTree.templates.main_male);
         FamilyTree.templates.main_male_child.link = '<path stroke-linejoin="round" stroke="#aeaeae" stroke-width="2px" fill="none" d="{rounded}" />';
 
         FamilyTree.templates.main_female = Object.assign({}, FamilyTree.templates.main_male);
-        FamilyTree.templates.main_female.node = '<rect x="0" y="0" height="{h}" width="{w}" fill="#ffffff" stroke-width="3" stroke="#cb4aaf" rx="5" ry="5"></rect>' +
-            '<rect x="0" y="0" height="20" width="{w}" fill="#cb4aaf" stroke-width="1" stroke="#cb4aaf" rx="5" ry="5"></rect>' +
-            '<line x1="0" y1="20" x2="250" y2="20" stroke-width="5" stroke="#cb4aaf"></line>';
+        FamilyTree.templates.main_female.node = '<rect x="0" y="0" height="{h}" width="{w}" fill="#ffffff" stroke-width="3" stroke="#ffb142" rx="5" ry="5"></rect>' +
+            '<rect x="0" y="0" height="20" width="{w}" fill="#ffb142" stroke-width="1" stroke="#ffb142" rx="5" ry="5"></rect>' +
+            '<line x1="0" y1="20" x2="250" y2="20" stroke-width="5" stroke="#ffb142"></line>';
         FamilyTree.templates.main_female.img_0 =
             `<use xlink:href="#base_img_0_stroke" />
-                               <circle id="base_img_0_stroke" fill="#cb4aaf" cx="45" cy="62" r="37"/>
+                               <circle id="base_img_0_stroke" fill="#ffb142" cx="45" cy="62" r="37"/>
                               <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}" x="10" y="26" width="72" height="72"></image>`;
         FamilyTree.templates.main_female_child = Object.assign({}, FamilyTree.templates.main_female);
         FamilyTree.templates.main_female_child.link = '<path stroke-linejoin="round" stroke="#aeaeae" stroke-width="2px" fill="none" d="{rounded}" />';
@@ -115,16 +115,16 @@
                                                                     background-color: #aeaeae;
                                                                 }
                                                                 .{randId}.male .bft-edit-form-header, .{randId}.male .bft-img-button{
-                                                                    background-color: #6bb4df;
+                                                                    background-color: #2f3640;
                                                                 }
                                                                 .{randId}.male div.bft-img-button:hover{
-                                                                    background-color: #cb4aaf;
+                                                                    background-color: #ffb142;
                                                                 }
                                                                 .{randId}.female .bft-edit-form-header, .{randId}.female .bft-img-button{
-                                                                    background-color: #cb4aaf;
+                                                                    background-color: #ffb142;
                                                                 }
                                                                 .{randId}.female div.bft-img-button:hover{
-                                                                    background-color: #6bb4df;
+                                                                    background-color: #2f3640;
                                                                 }
                             </style>`;
         FamilyTree.templates.single.node =
@@ -135,16 +135,16 @@
             '<text ' + FamilyTree.attr.width + ' ="60" style="font-size: 12px;" fill="black" x="100" y="180" text-anchor="middle">{val}</text>';
         FamilyTree.templates.single.nodeMenuButton = `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="89" y="5" xlink:href="#base_node_menu" />`;
         FamilyTree.templates.single_male = Object.assign({}, FamilyTree.templates.single);
-        FamilyTree.templates.single_male.node = '<circle cx="100" cy="100" r="100" fill="white" stroke-width="3" stroke="#6bb4df" ></circle>';
+        FamilyTree.templates.single_male.node = '<circle cx="100" cy="100" r="100" fill="white" stroke-width="3" stroke="#2f3640" ></circle>';
         FamilyTree.templates.single_male.img_0 =
             `<use xlink:href="#base_img_1_stroke"/>
-                               <circle id="base_img_1_stroke" fill="#6bb4df" cx="100" cy="62" r="37"/>
+                               <circle id="base_img_1_stroke" fill="#2f3640" cx="100" cy="62" r="37"/>
                               <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_1)" xlink:href="{val}" x="65" y="26" width="72" height="72"></image>`;
         FamilyTree.templates.single_female = Object.assign({}, FamilyTree.templates.single_male);
-        FamilyTree.templates.single_female.node = '<circle cx="100" cy="100" r="100" fill="white" stroke-width="3" stroke="#cb4aaf" ></circle>';
+        FamilyTree.templates.single_female.node = '<circle cx="100" cy="100" r="100" fill="white" stroke-width="3" stroke="#ffb142" ></circle>';
         FamilyTree.templates.single_female.img_0 =
             `<use xlink:href="#base_img_1_stroke"/>
-                               <circle id="base_img_1_stroke" fill="#cb4aaf" cx="100" cy="62" r="37"/>
+                               <circle id="base_img_1_stroke" fill="#ffb142" cx="100" cy="62" r="37"/>
                               <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_1)" xlink:href="{val}" x="65" y="26" width="72" height="72"></image>`;
 
         FamilyTree.templates.family_single_male = Object.assign({}, FamilyTree.templates.single_male);
@@ -182,7 +182,10 @@
                         text: 'Remove',
                         hideIfDetailsMode: true
                     }
-                }
+                },
+                elements:[
+                    { type:'textbox', label: 'Имя', binding: 'name' }
+                ]
             },
             orderBy: "orderId",
             tags: {
