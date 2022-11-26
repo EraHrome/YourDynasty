@@ -15,7 +15,7 @@
         @foreach (var face in Model.Faces)
         {
             <img src="@($"data:image/png;base64, {@face.ImageBase64}")" />
-            <p>@response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == face.Face.FaceUuid).Confidence</p>
+            <p>@($"{@response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == face.Face.FaceUuid).Confidence}\nВозраст: {face.Face.Tags.First(tag => tag.Name == "age").Value}")</p>
         }
     }
 

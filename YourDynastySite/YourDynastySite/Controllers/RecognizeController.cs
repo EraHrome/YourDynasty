@@ -40,9 +40,15 @@ namespace YourDynastySite.Controllers
             List<CroppedFace> faces = new();
             foreach (var faceId in facesIds)
             {
-                faces.Add(await _dynastyService.GetCroppedFace(faceId));
-                Guid personId = Guid.NewGuid();
-                await _dynastyService.SetPersonFaces(new List<Guid>() { faceId }, $"{personId}@{_dbName}");
+                CroppedFace face = await _dynastyService.GetCroppedFace(faceId);
+                string personId = face.Face.PersonId;
+                faces.Add(face);
+
+                if (string.IsNullOrEmpty(personId))
+                {
+                    Guid personGuid = Guid.NewGuid();
+                    await _dynastyService.SetPersonFaces(new List<Guid>() { faceId }, $"{personGuid}@{_dbName}");
+                }
             }
 
             UploadResultViewModel viewModel = new()
