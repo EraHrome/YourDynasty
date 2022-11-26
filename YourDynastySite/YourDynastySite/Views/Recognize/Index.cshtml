@@ -4,17 +4,24 @@
     ViewData["Title"] = "Recognize Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Загрузите изобраение</h1>
+<div class="overview sec-normal sec-bg1">
+    <div class="container">
+        <h3 class="testimonials wrapper heading">На нашем портале вы найдете:</h3>
+        <div class="row">
+            <div class="text-center">
+                <h1 class="display-4">Загрузите изобраение</h1>
 
-    @using (Html.BeginForm("Upload", "Recognize", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div>
-            @Html.LabelFor(x => x.File)
-            @Html.TextBoxFor(x => x.File, new { type = "file" })
-            @Html.ValidationMessageFor(x => x.File)
+                @using (Html.BeginForm("Upload", "Recognize", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div>
+                        @Html.LabelFor(x => x.File)
+                        @Html.TextBoxFor(x => x.File, new { type = "file" })
+                        @Html.ValidationMessageFor(x => x.File)
+                    </div>
+                    <button type="submit">Upload</button>
+                }
+
+            </div>
         </div>
-        <button type="sybmit">Upload</button>
-    }
-
+    </div>
 </div>

@@ -6,20 +6,33 @@
     var response = Model.Response;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Результат распознавания</h1>
-    <p>Выберите человека для поиска</p>
+<div class="overview sec-normal sec-bg1">
+    <div class="container">
+        <h3 class="testimonials wrapper heading">Результат распознавания:</h3>
+        <p>Выберите человека для поиска</p>
 
-    @if (response != null)
-    {
-        @*<img src="@($"data:image/png;base64, {@Model.Image}")" />*@
-        @foreach (var face in Model.Faces)
+        @if (response != null)
         {
-            <a href="@($"/Recognize/Matches/?faceId={face.Face.FaceUuid}")">
-                <img src="@($"data:image/png;base64, {@face.ImageBase64}")" />
-            </a>
+            @foreach (var face in Model.Faces)
+            {
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="img-over sec-grad-grey-to-grey">
+                            <img src="@($"data:image/png;base64, {@face.ImageBase64}")" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-8">
+                        <div class="overview-info">
+                            <a href="@($"/Recognize/Matches/?faceId={face.Face.FaceUuid}")">
+                                <h2 class="section-heading">Выбрать</h2>
+                            </a>
+
+                            <p class="overview-txt"></p>
+                        </div>
+                    </div>
+                </div>
+            }
         }
-    }
 
+    </div>
 </div>
-
