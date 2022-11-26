@@ -27,8 +27,4 @@
     <ProjectReference Include="..\Libraries\Parsers\WowParser\WowPersonParser.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Database\Entities\" />
-  </ItemGroup>
-
 </Project>
