@@ -1124,10 +1124,10 @@ a.plans.badge.feat:hover {
     bottom: -10px;
 }
 .active #nav-toggle span:before {
-    background: #a3d133 !important;
+    background: #ffb142 !important;
 }
 .active #nav-toggle span:after {
-    background: #a3d133 !important;
+    background: #ffb142 !important;
 }
 #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
     transition: all 250ms ease-in-out;
@@ -2526,6 +2526,22 @@ a.plans.badge.feat:hover {
     -ms-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
+}
+@media (max-width: 767px) {
+.services .service-wrap .service-section {
+    margin-top: 20px !important;
+	margin-bottom: 10px !important;
+}
+.services .service-wrap .row {
+    margin-bottom: 350px !important;
+	 margin-top: 250px !important;
+}
+}
+
+@media (max-width: 900px) {
+.owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next {
+    top: 80% !important;
+}
 }
 .services .service-wrap .service-section-action {
     border-radius: 15px;
