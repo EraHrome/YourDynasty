@@ -10,9 +10,9 @@ namespace WowPersonParsers.Clients
     {
         private readonly SeleniumParser _selenium;
 
-        private readonly string _searchPath = "html/search.htm";
-        private readonly string _infoPath = "html/info.htm";
-        private readonly string _baseUri = "http://www.obd-memorial.ru/";
+        private static string _searchPath = "html/search.htm";
+        private static string _infoPath = "html/info.htm";
+        private static string _baseUri = "http://www.obd-memorial.ru/";
 
         public ObdMemorialClient()
         {
@@ -34,6 +34,8 @@ namespace WowPersonParsers.Clients
 
             return content;
         }
+
+        public static string GetInfoLink(string id) => $"{_baseUri}{_infoPath}?id={id}";
 
         private static string BuildQueryString(PersonRequestDTO personRequest)
             => string.Join("&", personRequest.GetType().GetProperties()

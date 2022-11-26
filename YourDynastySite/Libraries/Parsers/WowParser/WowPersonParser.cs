@@ -77,6 +77,8 @@ namespace WowPersonParsers
                                             break;
                                     }
                                 }
+                                person.Link = ObdMemorialClient.GetInfoLink(node.Id);
+                                person.Id = node.Id;
                                 persons.Add(person);
                             }
                         }

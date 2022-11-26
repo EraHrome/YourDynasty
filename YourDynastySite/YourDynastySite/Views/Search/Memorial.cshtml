@@ -1,0 +1,45 @@
+﻿@model YourDynastySite.Models.SearchMemorialModel
+<div id="spinner-area">
+    <div class="spinner">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+    <div class="spinner-txt">загрузка...</div>
+    </div>
+</div>
+<p id="nav-toggle">
+</p>
+<div class="fullrock2 fullrock total-grad-purple">
+    <a onclick="window.history.go(-1); return false;" class="closebtn">
+    <img src="img/closer.svg" class="closer" alt="">
+    </a>
+    <div class="fullrock-content">
+    <section class="pb-100">
+        <div class="register contact-us">
+        <div class="container">
+            <img src="img/logo.svg" alt="logo" class="logo-footer">
+            <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="form-contact sec-grad-white-to-green">
+                <h1 class="subtitle mb-1">Создание нового аккаунта</h1>
+                <p >Заполните поля ниже, чтобы создать аккаунт. Уже зарегистрированы?  <a class="golink" href="login.html">Войдите в аккаунт</a>
+                </p>
+                <form class="comments-form">
+                    @Html.TextBoxFor(x => x.Name, new { placeholder = "Введите имя", @class = "input" })
+                    @Html.TextBoxFor(x => x.Surname, new { placeholder = "Введите фамилию", @class = "input" })
+                    @Html.TextBoxFor(x => x.MiddleName, new { placeholder = "Введите отчество", @class = "input" })
+                    @Html.TextBoxFor(x => x.Birthday, new { placeholder = "Введите дату рождения", @class = "input" })
+                    @Html.TextBoxFor(x => x.Birthplace, new { placeholder = "Введите место рождения", @class = "input" })
+                    @Html.TextBoxFor(x => x.Country, new { placeholder = "Введите страну захоронения", @class = "input" })
+                    @Html.TextBoxFor(x => x.Region, new { placeholder = "Введите регион захоронения", @class = "input" })
+                    @Html.TextBoxFor(x => x.BurialPlace, new { placeholder = "Введите место захоронения", @class = "input" })
+                    @Html.TextBoxFor(x => x.Rang, new { placeholder = "Введите звание", @class = "input" })
+                    <input id="form-memorial-submit" type="button" class="btn btn-default-blue-fill" value="Найти">
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    </div>
+</div>

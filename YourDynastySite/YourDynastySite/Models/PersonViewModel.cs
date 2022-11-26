@@ -1,6 +1,6 @@
-﻿namespace WowPersonParsers.Models
+﻿namespace YourDynastySite.Models
 {
-    public class Person
+    public class PersonViewModel
     {
         /// <summary>
         /// Идентификатор
