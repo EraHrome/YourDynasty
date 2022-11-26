@@ -1,45 +1,97 @@
 ﻿@model YourDynastySite.Models.SearchMemorialModel
-<div id="spinner-area">
-    <div class="spinner">
-    <div class="double-bounce1"></div>
-    <div class="double-bounce2"></div>
-    <div class="spinner-txt">загрузка...</div>
+<div class="top-header">
+      <div class="total-grad"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+			  <div class="specs">
+				  <div class="">
+					<img src="img/avatars/avatar3.png" height="42" alt="">
+				  </div>
+			  </div>
+				<div class="wrapper">
+				  <div class="heading">Иван Иванов    <i class="fas fa-check"></i></div>
+				 <h3 class="subheding">Премиум-подписка активна до 30.11.2022</h3>
+				</div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-<p id="nav-toggle">
-</p>
-<div class="fullrock2 fullrock total-grad-purple">
-    <a onclick="window.history.go(-1); return false;" class="closebtn">
-    <img src="img/closer.svg" class="closer" alt="">
-    </a>
-    <div class="fullrock-content">
-    <section class="pb-100">
-        <div class="register contact-us">
-        <div class="container">
-            <img src="img/logo.svg" alt="logo" class="logo-footer">
-            <div class="row">
-            <div class="col-md-12 col-lg-12">
-                <div class="form-contact sec-grad-white-to-green">
-                <h1 class="subtitle mb-1">Создание нового аккаунта</h1>
-                <p >Заполните поля ниже, чтобы создать аккаунт. Уже зарегистрированы?  <a class="golink" href="login.html">Войдите в аккаунт</a>
+	 <!-- 
+    *******************
+    WHY CHOOSE ELASTIC 
+    ******************* 
+    -->
+    <section class="services classic sec-uping">
+      <div class="container">
+        <div class="service-wrap">
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <div class="service-section">
+                <div class="title">Генеалогическое древо</div>
+                <p class="subtitle">
+                 Сохраните память о поколениях и найдите своих родственников 
                 </p>
-                <form class="comments-form">
-                    @Html.TextBoxFor(x => x.Name, new { placeholder = "Введите имя", @class = "input" })
-                    @Html.TextBoxFor(x => x.Surname, new { placeholder = "Введите фамилию", @class = "input" })
-                    @Html.TextBoxFor(x => x.MiddleName, new { placeholder = "Введите отчество", @class = "input" })
-                    @Html.TextBoxFor(x => x.Birthday, new { placeholder = "Введите дату рождения", @class = "input" })
-                    @Html.TextBoxFor(x => x.Birthplace, new { placeholder = "Введите место рождения", @class = "input" })
-                    @Html.TextBoxFor(x => x.Country, new { placeholder = "Введите страну захоронения", @class = "input" })
-                    @Html.TextBoxFor(x => x.Region, new { placeholder = "Введите регион захоронения", @class = "input" })
-                    @Html.TextBoxFor(x => x.BurialPlace, new { placeholder = "Введите место захоронения", @class = "input" })
-                    @Html.TextBoxFor(x => x.Rang, new { placeholder = "Введите звание", @class = "input" })
-                    <input id="form-memorial-submit" type="button" class="btn btn-default-blue-fill" value="Найти">
-                </form>
-                </div>
+				<a href="" class="btn btn btn-default-green-fill">Перейти</a>
+              </div>
             </div>
+            <div class="col-sm-12 col-md-4">
+              <div class="service-section">
+                <div class="title">Поиск по фото</div>
+                <p class="subtitle">
+                  Ищите людей в социальных сетях с помощью фотографий
+                </p> 
+				<a href="" class="btn btn btn-default-green-fill">Перейти</a>
+              </div>
             </div>
-        </div>
-        </div>
+            <div class="col-sm-12 col-md-4">
+              <div class="service-section-action service-section">
+                <div class="plans badge feat bg-green">Новое</div> 
+                <div class="title">Запрос архивов</div>
+                <p class="subtitle">
+                  Найдите данные о родственниках в открытых банках данных
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </div>
     </section>
-    </div>
-</div>
+
+	  <!-- 
+    *******************
+    TIPOGRAPHY
+    ******************* 
+    -->
+    <section class="tipography-ex sec-normal">
+      <div class="container">
+			<h3 class="testimonials wrapper">Запрос в архивах:</h3>
+            <p>Максимально полно укажите информацию о человеке - наш сервия найдёт совпадения в открытых банках данных. Обратите внимание - не все поля обязательны к заполнению.</p>		
+			 <form class="comments-form">
+                    @*@Html.TextBoxFor(x => x.Rang, new { placeholder = "Введите звание", @class = "input" })*@
+					  <div class="multirow">
+						@Html.TextBoxFor(x => x.Name, new { placeholder = "Имя", @class = "input tripleline" })
+                        @Html.TextBoxFor(x => x.Surname, new { placeholder = "Фамилию", @class = "input tripleline" })
+                        @Html.TextBoxFor(x => x.MiddleName, new { placeholder = "Отчество", @class = "input tripleline" })
+					  </div>
+					  <div class="multirow">
+						@Html.TextBoxFor(x => x.Birthday, new { placeholder = "Дата рождения", @class = "input doubleline" })
+                        @Html.TextBoxFor(x => x.Birthplace, new { placeholder = "Место рождения", @class = "input doubleline" })
+					  </div>
+					  <div class="multirow">
+                        @Html.TextBoxFor(x => x.Country, new { placeholder = "Страна захоронения", @class = "input tripleline" })
+                        @Html.TextBoxFor(x => x.Region, new { placeholder = "Регион захоронения", @class = "input tripleline" })
+                        @Html.TextBoxFor(x => x.BurialPlace, new { placeholder = "Место захоронения", @class = "input tripleline" })
+					  </div>
+					  <input id="form-memorial-submit" type="button" class="btn btn-default-green-fill" value="Искать">
+               </form>
+      </div>
+    </section>
+	
+	<!-- 
+    *******************
+    BLOG DETAILS
+    ******************* 
+    -->
+    <section id="memorial-container" class="shopping blog">
+    </section>

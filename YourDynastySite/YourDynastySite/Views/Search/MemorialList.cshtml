@@ -1,0 +1,30 @@
+﻿@model YourDynastySite.Models.PersonsViewModel
+<div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="wrap-blog">           
+              <div class="row">
+                <div class="col-md-12 col-lg-12 mb-80">
+                    <div class="heading comment">Мы нашли @(Model.Persons?.Count ?? 0) подходящих людей:</div>
+                    <div class="line"></div>
+                        @foreach(var person in Model.Persons)
+                        {
+                            var fullName = $"{person.Surname} {person.Name} {person.MiddleName}";
+                             <div class="media">
+                              <img class="media-object" src="https://roadhram.storage.yandexcloud.net/roadheroes/b31/65b/b3165bb48468744e08391c8ce737706a_crop.jpg" alt="@fullName">
+                              <div class="media-body">
+                                <h4 class="media-heading">@fullName</h4>
+                                <div class="text-blog mt-0">
+                                  <span>@(!string.IsNullOrEmpty(person.Birthday) ? $"{person.Birthday}," : string.Empty ) @person.Birthplace</span>
+                                </div>
+						        <a class="goto-link" href="@person.Link"> <div class="btn-listing btn-default-green-fill">Источник</div></a>
+                              </div>
+                            </div><hr>
+                        }
+					<a class="btn btn-default-green-fill">Загрузить еще</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WowPersonParsers.Models;
 using YourDynastySite.Models;
 
 namespace YourDynastySite.Controllers
@@ -14,7 +15,7 @@ namespace YourDynastySite.Controllers
         }
        
         [HttpGet("memorial")]
-        public async Task<IActionResult> GetList(SearchMemorialModel model)
+        public async Task<IActionResult> MemorialList(SearchMemorialModel model)
         {
             var res = await _parser.GetPersons(new()
             {
@@ -27,7 +28,8 @@ namespace YourDynastySite.Controllers
                 Region = model.Region,
                 BurialPlace = model.BurialPlace
             });
-            return Ok(res);
+
+            return View(new PersonsViewModel() { Persons = res.IsSuccess ? res.Persons : new() });
         }
     }
 }
