@@ -98,31 +98,29 @@ FEATURES
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     <div class="wrap-service">
-                        <img src="~/fonts/svg/security.svg" height="65" alt="">
-                        <div class="heading animated fadeInUp delay-2s">Быстро</div>
+                        <img src="~/img/icons/book.png" alt="">
+                        <div class="heading animated fadeInUp delay-2s">Сохраняйте историю</div>
                         <div class="text-info">
-                            Наш алгоритм ищет изображения в открытых базах данных и
-                            социальных сетях, чтобы быстро получать всю информацию о человеке.
+                            Сохраняйте историю своей семьи на нашем сайте и делитесь генеалогическим древом с близкими.
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     <div class="wrap-service">
-                        <img src="~/fonts/svg/speed.svg" height="65" alt="">
-                        <div class="heading">Бесплатно</div>
+                        <img src="~/img/icons/card.png" alt="">
+                        <div class="heading">Не тратьте деньги</div>
                         <div class="text-info">
                             Вы можете найти человека по фото бесплатно.
-                            Мы не потребуем денег за использование сервиса.
+                            Основные возможности доступны сразу после регистрации.
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-4 clear-md">
                     <div class="wrap-service">
-                        <img src="~/fonts/svg/upgrade.svg" height="65" alt="">
-                        <div class="heading">Бесплатно</div>
+                        <img src="~/img/icons/chains.png" alt="">
+                        <div class="heading">Восстанавливайте связи</div>
                         <div class="text-info">
-                            Вы можете найти человека по фото бесплатно.
-                            Мы не потребуем денег за использование сервиса.
+                            Находите родственников и делайте открытия при помощи умной системы поиска.
                         </div>
                     </div>
                 </div>
@@ -351,8 +349,18 @@ TESTIMONIALS
                                     </tr>
                                     <tr>
                                         <td class="border-0"></td>
-                                        <td><a href="/profile" class="btn btn-default-green-fill">Начать бесплатно</a></td>
-                                        <td><a href="/profile" class="btn btn-default-green-fill">Оплатить</a></td>
+
+                                         @if (!User.Identity.IsAuthenticated)
+                                        {
+                                            <td><a href="/registration" class="btn btn-default-green-fill">Начать бесплатно</a></td>
+                                            <td><a href="/registration" class="btn btn-default-green-fill">Оплатить</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td><a href="/profile" class="btn btn-default-green-fill">Начать бесплатно</a></td>
+                                            <td><a href="/profile" class="btn btn-default-green-fill">Оплатить</a></td>
+                                        }
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -381,7 +389,14 @@ GET READY
             </div>
             <div class="col-lg-4">
                 <div class="btn-floats">
-                    <a href="/profile" class="btn btn-default-green-fill mt-2 mr-3">Начать</a>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a href="/registration" class="btn btn-default-green-fill mt-2 mr-3">Начать</a>
+                    }
+                    else
+                    {
+                        <a href="/profile" class="btn btn-default-green-fill mt-2 mr-3">Начать</a>
+                    }
                 </div>
             </div>
         </div>

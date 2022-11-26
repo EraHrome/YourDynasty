@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Models.Keys;
 using YourDynastySite.Database.Contexts;
 using YourDynastySite.Middlewares;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -48,5 +49,15 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Use(async (context, next) =>
+{
+    if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+    {
+        context.Response.Redirect($"/login?redirect={context.Request.Path}");
+    }
+
+    await next();
+});
 
 app.Run();

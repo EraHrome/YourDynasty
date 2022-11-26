@@ -35,6 +35,8 @@ namespace WowPersonParsers.Clients
             return content;
         }
 
+        public void CloseConnection() => _selenium.CloseConnection();
+
         public static string GetInfoLink(string id) => $"{_baseUri}{_infoPath}?id={id}";
 
         private static string BuildQueryString(PersonRequestDTO personRequest)
