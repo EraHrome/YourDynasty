@@ -50,6 +50,9 @@ namespace YourDynastySite.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Matches
+        public async Task<IActionResult> Matches()
+        {
+            return View();
+        }
     }
 }
