@@ -1,0 +1,22 @@
+﻿@model MatchesResultModel
+
+@{
+    ViewData["Title"] = "Matches Page";
+
+    var response = Model.Recognize;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Результат поиска совпадений</h1>
+    <p>Нашли этого человека?</p>
+
+    @if (response != null)
+    {
+        @foreach (var face in Model.Faces)
+        {
+            <img src="@($"data:image/png;base64, {@face.ImageBase64}")" />
+        }
+    }
+
+</div>
+
