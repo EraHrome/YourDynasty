@@ -103,5 +103,12 @@ namespace YourDynastySite.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> GenealogyTree(Guid personId)
+        {
+
+
+            return View();
+        }
     }
 }
