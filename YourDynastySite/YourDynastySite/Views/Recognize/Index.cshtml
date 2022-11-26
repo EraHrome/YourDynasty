@@ -75,26 +75,13 @@ TIPOGRAPHY
 <section class="tipography-ex sec-normal">
     <div class="container">
         <p>Загрузите фотографию с вашего устройства, чтобы осуществить поиск.</p>
-        @using (Html.BeginForm("Upload", "Recognize", FormMethod.Post, new { enctype = "multipart/form-data",  @class = "btn btn-default-green-fill" }))
+        @using (Html.BeginForm("Upload", "Recognize", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div>
-                @Html.LabelFor(x => x.File)
                 @Html.TextBoxFor(x => x.File, new { type = "file" })
-                @Html.ValidationMessageFor(x => x.File)
+                @Html.ValidationMessageFor(x => x.File, String.Empty, new { style = "color: #ffb142;"})
             </div>
-            <button type="submit">Загрузить</button>
+            <button style="margin-top:10px;" class="btn btn-default-green-fill" type="submit">Начать поиск</button>
         }
     </div>
 </section>
-
-@*<!--
-*******************
-TIPOGRAPHY
-*******************
--->
-<section class="tipography-ex sec-normal">
-    <div class="container">
-        <p>Вы загрузили фотографию: <span style="color: #ffb142;">image1.png</span></p>
-        <a href="" class="btn btn-default-green-fill">Найти</a>
-    </div>
-</section>*@
