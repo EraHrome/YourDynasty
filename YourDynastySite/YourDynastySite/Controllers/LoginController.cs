@@ -21,11 +21,7 @@ namespace Forum.Areas.User
         [HttpGet("login")]
         public async Task<IActionResult> Index(string? redirect)
         {
-            var res = await _wowPersonParser.GetPersons(new WowPersonParsers.Models.Dtos.PersonRequestDTO
-            {
-                Name = "Никита"
-            });
-            return Ok();
+            return View((object?)redirect);
         }
 
         [HttpGet("exit")]
