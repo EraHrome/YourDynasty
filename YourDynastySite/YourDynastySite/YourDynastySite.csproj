@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\DynastyService\src\IO.Swagger\DynastyService.csproj" />
     <ProjectReference Include="..\Libraries\Models\Models.csproj" />
+    <ProjectReference Include="..\Libraries\Parsers\WowParser\WowPersonParser.csproj" />
   </ItemGroup>
 
   <ItemGroup>

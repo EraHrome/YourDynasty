@@ -1,11 +1,11 @@
 ﻿using HtmlAgilityPack;
 using Newtonsoft.Json;
-using WowPersonParser.Clients;
-using WowPersonParser.Helpers;
-using WowPersonParser.Models;
-using WowPersonParser.Models.Dtos;
+using WowPersonParsers.Clients;
+using WowPersonParsers.Helpers;
+using WowPersonParsers.Models;
+using WowPersonParsers.Models.Dtos;
 
-namespace WowPersonParser
+namespace WowPersonParsers
 {
     public class WowPersonParser
     {
@@ -27,7 +27,7 @@ namespace WowPersonParser
                 {
                     HtmlDocument doc = new();
                     doc.LoadHtml(content);
-                    var nodes = doc.DocumentNode.SelectNodes("//*[@class='row search-result']");
+                    var nodes = doc.DocumentNode.SelectNodes("//[@class='search-result']");
                     foreach (var node in nodes)
                     {
                         var infoContent = await _obdMemorialClient.GetInfo(node.Id);
@@ -36,11 +36,11 @@ namespace WowPersonParser
                             string json = string.Empty;
                             HtmlDocument docInfo = new();
                             docInfo.LoadHtml(content);
-                            var nodeInfos = docInfo.DocumentNode.SelectNodes("//*[@class='card_parameter']");
+                            var nodeInfos = doc.DocumentNode.SelectNodes("//[@class='card_parameter']");
                             foreach (var info in nodeInfos)
                             {
-                                var nameProp = info.SelectSingleNode("//*[@class='card_param-title']").InnerText.GetPropName();
-                                var value = info.SelectSingleNode("//*[@class='card_param-result']").InnerText;
+                                var nameProp = info.SelectSingleNode("//[@class='card_param-title']").InnerText.GetPropName();
+                                var value = info.SelectSingleNode("//[@class='card_param-result']").InnerText;
                                 json += $"\"{nameProp}\":\"{value}\"";
                             }
 
