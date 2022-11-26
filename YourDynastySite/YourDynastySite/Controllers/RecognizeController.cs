@@ -131,14 +131,14 @@ namespace YourDynastySite.Controllers
             dynastyPerson.DeathDate = person.DeathDate;
             dynastyPerson.SourceLink = person.SourceLink;
             dynastyPerson.PartnerId = person.PartnerId;
-            dynastyPerson.FaceId= person.FaceId;
-            dynastyPerson.FatherId= person.FatherId;
-            dynastyPerson.MotherId= person.MotherId;
-            dynastyPerson.Name= person.Name;
-            dynastyPerson.Surname= person.Surname;
-            dynastyPerson.MiddleName= person.MiddleName;
-            dynastyPerson.BurialPlace= person.BurialPlace;
-            dynastyPerson.BurialRegion= person.BurialRegion;
+            dynastyPerson.FaceId = person.FaceId;
+            dynastyPerson.FatherId = person.FatherId;
+            dynastyPerson.MotherId = person.MotherId;
+            dynastyPerson.Name = person.Name;
+            dynastyPerson.Surname = person.Surname;
+            dynastyPerson.MiddleName = person.MiddleName;
+            dynastyPerson.BurialPlace = person.BurialPlace;
+            dynastyPerson.BurialRegion = person.BurialRegion;
 
             await _context.SaveChangesAsync();
 
@@ -147,21 +147,48 @@ namespace YourDynastySite.Controllers
 
         public async Task<IActionResult> GenealogyTree(Guid personId)
         {
-            Guid test1 = Guid.NewGuid();
-            Guid test2 = Guid.NewGuid();
-            Guid test3 = Guid.NewGuid();
-
-            GenealogyTreeModel veiwModel = new()
+            GenealogyTreeModel viewModel = new()
             {
                 Persons = new()
-                {
-                    new(){ Id = test1, PartnerId = test2, Name = "Test1", FaceId = test1, Gender = 0},
-                    new(){ Id = test2, PartnerId = test1, Name = "Test2", FaceId = test1, Gender = 1},
-                    new(){ Id = test3, FatherId = test1, MotherId = test2, Name = "Test3", FaceId = test1, Gender = 0},
-                }
             };
+            var res = await GetPersonTree(viewModel, personId);
+            return View(res);
+        }
 
-            return View(veiwModel);
+        public async Task<GenealogyTreeModel> GetPersonTree(GenealogyTreeModel treeModel, Guid personId)
+        {
+            var person = await _context.DynastyPersons.FirstOrDefaultAsync(x => x.Id == personId);
+            if (person == null)
+            {
+                return treeModel;
+            }
+            treeModel.Persons.Add(person);
+            var existingIds = treeModel.Persons.Select(x => x.Id);
+            if (person.PartnerId.HasValue && !existingIds.Any(x => existingIds.Contains(person.PartnerId.Value)))
+            {
+                var partners = await GetPersonTree(treeModel, person.PartnerId.Value);
+                treeModel.Persons.AddRange(partners.Persons);
+            }
+            if (person.MotherId.HasValue && !existingIds.Any(x => existingIds.Contains(person.MotherId.Value)))
+            {
+                var motherTree = await GetPersonTree(treeModel, person.MotherId.Value);
+                treeModel.Persons.AddRange(motherTree.Persons);
+            }
+            if (person.FatherId.HasValue && !existingIds.Any(x => existingIds.Contains(person.FatherId.Value)))
+            {
+                var fatherTree = await GetPersonTree(treeModel, person.FatherId.Value);
+                treeModel.Persons.AddRange(fatherTree.Persons);
+            }
+            var persons = new List<DynastyPerson>();
+            foreach (var pers in treeModel.Persons)
+            {
+                if (!persons.Any(x => x.Id == pers.Id))
+                {
+                    persons.Add(pers);
+                }
+            }
+            treeModel.Persons = persons;
+            return treeModel;
         }
     }
 }
