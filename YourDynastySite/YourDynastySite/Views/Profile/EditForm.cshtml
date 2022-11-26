@@ -1,16 +1,12 @@
-﻿@model RecognizeUploadModel;
-
-@{
-    ViewData["Title"] = "Recognize Page";
-}
+﻿@model YourDynastySite.Database.Entities.DynastyPerson
 
 <div id="spinner-area">
-        <div class="spinner">
-            <div class="double-bounce1"></div>
-            <div class="double-bounce2"></div>
-            <div class="spinner-txt">загрузка...</div>
-        </div>
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+        <div class="spinner-txt">загрузка...</div>
     </div>
+</div>
 
 <!--
     *******************
@@ -28,7 +24,7 @@
                     </div>
                 </div>
                 <div class="wrapper">
-                    <div class="heading">@User.Identity.Name <a style="color:#cc8e35 !important" href="@Url.Action("EditForm", "Profile")"><i class="fa fa-pencil" style="font-size:24px"></i></a> </div>
+                    <div class="heading">@User.Identity.Name <a style="color:#cc8e35 !important" href="@Url.Action("EditForm", "Profile")"><i class="fa fa-pencil" style="font-size:24px"></i></a></i></div>
                     <h3 class="subheding">Премиум-подписка активна до 30.11.2022</h3>
                 </div>
             </div>
@@ -36,15 +32,15 @@
     </div>
 </div>
 <!--
-    *******************
-    WHY CHOOSE ELASTIC
-    *******************
-    -->
+*******************
+WHY CHOOSE ELASTIC
+*******************
+-->
 <section class="services classic sec-uping">
     <div class="container">
         <div class="service-wrap">
             <div class="row">
-                <div class="col-sm-1 col-md-4">
+                <div class="col-sm-12 col-md-4">
                     <div class="service-section">
                         <div class="title">Генеалогическое древо</div>
                         <p class="subtitle">
@@ -54,11 +50,12 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4">
-                    <div class="service-section-action service-section">
+                    <div class="service-section">
                         <div class="title">Поиск по фото</div>
                         <p class="subtitle">
                             Ищите людей в социальных сетях с помощью фотографий
                         </p>
+                        <a href="@Url.Action("Index","Recognize")" class="btn btn btn-default-green-fill">Перейти</a>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4">
@@ -75,21 +72,31 @@
         </div>
     </div>
 </section>
-<!--
-*******************
-TIPOGRAPHY
-*******************
--->
+
 <section class="tipography-ex sec-normal">
     <div class="container">
-        <p>Загрузите фотографию с вашего устройства, чтобы осуществить поиск.</p>
-        @using (Html.BeginForm("Upload", "Recognize", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <div>
-                @Html.TextBoxFor(x => x.File, new { type = "file" })
-                @Html.ValidationMessageFor(x => x.File, String.Empty, new { style = "color: #ffb142;"})
+        <h3 class="testimonials wrapper">Изменить данные аккаунта:</h3>
+        <p>Заполните дополнительную информацию о себе</p>
+        <form action="@Url.Action("Update", "Profile"))" class="comments-form">
+            <div class="multirow">
+                @Html.TextBoxFor(x => x.Name, new { placeholder = "Имя", @class = "input tripleline" })
+                @Html.TextBoxFor(x => x.Surname, new { placeholder = "Фамилия", @class = "input tripleline" })
+                @Html.TextBoxFor(x => x.MiddleName, new { placeholder = "Отчество", @class = "input tripleline" })
             </div>
-            <button style="margin-top:10px;" class="btn btn-default-green-fill" type="submit">Начать поиск</button>
-        }
+            <div class="multirow">
+                @Html.TextBoxFor(x => x.BirthDate, new { placeholder = "Дата рождения", @class = "input doubleline" })
+                @Html.TextBoxFor(x => x.BirthPlace, new { placeholder = "Место рождения", @class = "input doubleline" })
+            </div>
+            <div class="multirow">
+                @Html.TextBoxFor(x => x.MotherId, new { placeholder = "Id матери", @class = "input tripleline" })
+                @Html.TextBoxFor(x => x.FatherId, new { placeholder = "Id отца", @class = "input tripleline" })
+                @Html.TextBoxFor(x => x.PartnerId, new { placeholder = "Id партнера", @class = "input tripleline" })
+            </div>
+
+            <input id="gender" type="number" name="gender" placeholder="Пол" class="input tripleline" value="@Model.Gender" min="0" max="1" step="1">
+
+            <input name="Id" type="hidden" value="@Model.Id" />
+            <input id="form-memorial-submit" type="button" class="btn btn-default-green-fill" value="Сохранить">
+        </form>
     </div>
 </section>
