@@ -120,19 +120,30 @@
                                     <hr>
                                     <form class="comments-form" person-additional-form="@person.face.Face.FaceUuid" action="@Url.Action("AddPerson", "Recognize")" hidden>
                                         <div class="multirow">
-                                            <input id="middlename" type="text" name="middlename" placeholder="Фамилия" class="input tripleline" value="@person.person?.MiddleName" required>
-                                            <input id="name" type="text" name="name" placeholder="Имя" class="input tripleline" value="@person.person?.Name" required>
-                                            <input id="surname" type="text" name="surname" placeholder="Отчество" class="input tripleline" value="@person.person?.Surname" required>
+                                            <input id="middlename" type="text" name="middlename" placeholder="Фамилия" class="input tripleline" value="@person.person?.MiddleName">
+                                            <input id="name" type="text" name="name" placeholder="Имя" class="input tripleline" value="@person.person?.Name">
+                                            <input id="surname" type="text" name="surname" placeholder="Отчество" class="input tripleline" value="@person.person?.Surname">
                                         </div>
                                         <div class="multirow">
-                                            <input id="birthdate" type="text" name="birthdate" placeholder="Дата рождения" class="input doubleline" value="@person.person?.BirthDate" required>
-                                            <input id="birthplace" type="text" name="birthplace" placeholder="Место рождения" class="input doubleline" value="@person.person?.BirthPlace" required>
+                                            <input id="birthdate" type="date" name="birthdate" placeholder="Дата рождения" class="input doubleline" value="@person.person?.BirthDate">
+                                            <input id="birthplace" type="text" name="birthplace" placeholder="Место рождения" class="input doubleline" value="@person.person?.BirthPlace">
                                         </div>
                                         <div class="multirow">
-                                            <input id="deathdate" type="text" name="deathdate" placeholder="Дата смерти" class="input tripleline" value="@person.person?.DeathDate" required>
-                                            <input id="burialregion" type="text" name="burialregion" placeholder="Регион захоронения" class="input tripleline" value="@person.person?.BurialRegion" required>
-                                            <input id="burialplace" type="text" name="burialplace" placeholder="Место захоронения" class="input tripleline" value="@person.person?.BurialPlace" required>
+                                            <input id="deathdate" type="date" name="deathdate" placeholder="Дата смерти" class="input tripleline" value="@person.person?.DeathDate">
+                                            <input id="burialregion" type="text" name="burialregion" placeholder="Регион захоронения" class="input tripleline" value="@person.person?.BurialRegion">
+                                            <input id="burialplace" type="text" name="burialplace" placeholder="Место захоронения" class="input tripleline" value="@person.person?.BurialPlace">
                                         </div>
+                                        
+                                        <div>
+                                            <input id="gender" type="number" name="gender" placeholder="Пол" class="input tripleline" value="@person.person?.Gender" min="0" max="1" step="1">
+                                            <input id="motherid" type="text" name="motherid" placeholder="Id матери" class="input tripleline" value="@person.person?.MotherId">
+                                            <input id="fatherid" type="text" name="fatherid" placeholder="Id отца" class="input tripleline" value="@person.person?.FatherId">
+                                            <input id="partnerid" type="text" name="partnerid" placeholder="Id партнера" class="input tripleline" value="@person.person?.PartnerId">
+                                        </div>
+
+                                        <input id="id" type="hidden" name="id" value="@person.person?.Id">
+                                        <input id="faceid" type="hidden" name="faceid" value="@person.face.Face.FaceUuid">
+
                                         <input id="form-submit" type="submit" style="max-width: 125px" class="btn-listing btn-default-green-fill" value="Сохранить">
                                     </form>
                                 }
