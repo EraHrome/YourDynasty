@@ -78,7 +78,7 @@
 
                     <div class="row">
                         <div class="col-md-12 col-lg-12 mb-80">
-                            <div class="heading comment">Мы нашли N подходящих людей:</div>
+                            <div class="heading comment">Мы нашли @response.Results.Count подходящих людей:</div>
                             <div class="line"></div>
 
                             @if (response != null)
@@ -90,7 +90,15 @@
                                         <div class="media-body">
                                             <h4 class="media-heading">@(person.person == null ? "Имя не найдено" : person.person.Name)</h4>
                                             <div class="text-blog mt-0">
-                                                <span>12.02.1999 г.р., Пензенская обл., Башмаковский р-н - спаршено откуда-то</span>
+                                                @if (person.person?.BirthDate.HasValue ?? false)
+                                                {
+                                                    <span>@($"Дата рождения: {person.person?.BirthDate.ToString()}")</span>
+                                                }
+                                                @if (!string.IsNullOrEmpty(person.person?.BirthPlace))
+                                                {
+                                                    <span>@($"Место рождения: {person.person?.BirthPlace}")</span>
+                                                }
+                                                
                                                 <p class="overview-txt">
                                                     @($"Вероятность совпадения: {response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == person.face.Face.FaceUuid).Confidence}")
                                                 </p>
@@ -99,9 +107,12 @@
                                                 </p>
                                             </div>
                                             <div class="multirow-auto">
-                                                <a class="goto-link" href=""> <div style="max-width: 250px" class="btn-listing btn-default-green-fill">На древо</div></a>
-                                                <a class="goto-link" href="https://obd-memorial.ru/html/info.htm?id=5420874"> <div class="btn-listing btn-default-green-fill">Источник</div></a>
-                                                <a class="goto-link" href=""> <div style="max-width: 100px" class="btn-listing btn-default-green-fill" person-form-btn="@person.face.Face.FaceUuid">Дополнить</div></a>
+                                                @*<a class="goto-link" href=""> <div style="max-width: 250px" class="btn-listing btn-default-green-fill">На древо</div></a>*@
+                                                @if (!string.IsNullOrEmpty(person.person?.SourceLink))
+                                                {
+                                                    <a class="goto-link" href="https://obd-memorial.ru/html/info.htm?id=5420874"> <div class="btn-listing btn-default-green-fill">Источник</div></a>
+                                                }
+                                                <div style="max-width: 100px" class="btn-listing btn-default-green-fill" person-form-btn="@person.face.Face.FaceUuid">Дополнить</div>
                                             </div>
                                         </div>
                                     </div>
@@ -109,18 +120,18 @@
                                     <hr>
                                     <form class="comments-form" person-additional-form="@person.face.Face.FaceUuid" action="@Url.Action("AddPerson", "Recognize")" hidden>
                                         <div class="multirow">
-                                            <input id="middlename" type="text" name="middlename" placeholder="Фамилия" class="input tripleline" required>
-                                            <input id="firstname" type="text" name="firstname" placeholder="Имя" class="input tripleline" required>
-                                            <input id="surname" type="text" name="surname" placeholder="Отчество" class="input tripleline" required>
+                                            <input id="middlename" type="text" name="middlename" placeholder="Фамилия" class="input tripleline" value="@person.person?.MiddleName" required>
+                                            <input id="name" type="text" name="name" placeholder="Имя" class="input tripleline" value="@person.person?.Name" required>
+                                            <input id="surname" type="text" name="surname" placeholder="Отчество" class="input tripleline" value="@person.person?.Surname" required>
                                         </div>
                                         <div class="multirow">
-                                            <input id="birthplace" type="text" name="birthplace" placeholder="Дата рождения" class="input doubleline" required>
-                                            <input id="birthdate" type="text" name="birthdate" placeholder="Место рождения" class="input doubleline" required>
+                                            <input id="birthdate" type="text" name="birthdate" placeholder="Дата рождения" class="input doubleline" value="@person.person?.BirthDate" required>
+                                            <input id="birthplace" type="text" name="birthplace" placeholder="Место рождения" class="input doubleline" value="@person.person?.BirthPlace" required>
                                         </div>
                                         <div class="multirow">
-                                            <input id="deathplace" type="text" name="deathplace" placeholder="Дата смерти" class="input tripleline" required>
-                                            <input id="burialregion" type="text" name="burialregion" placeholder="Регион захоронения" class="input tripleline" required>
-                                            <input id="burialplace" type="text" name="burialplace" placeholder="Место захоронения" class="input tripleline" required>
+                                            <input id="deathdate" type="text" name="deathdate" placeholder="Дата смерти" class="input tripleline" value="@person.person?.DeathDate" required>
+                                            <input id="burialregion" type="text" name="burialregion" placeholder="Регион захоронения" class="input tripleline" value="@person.person?.BurialRegion" required>
+                                            <input id="burialplace" type="text" name="burialplace" placeholder="Место захоронения" class="input tripleline" value="@person.person?.BurialPlace" required>
                                         </div>
                                         <input id="form-submit" type="submit" style="max-width: 125px" class="btn-listing btn-default-green-fill" value="Сохранить">
                                     </form>
