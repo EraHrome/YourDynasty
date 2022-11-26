@@ -1,49 +1,132 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - YourDynastySite</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/YourDynastySite.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Твоя Династия - поиск родственников по фото</title>
+    <meta name="description" content="">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/fonts/cloudicon/cloudicon.css" rel="stylesheet">
+    <link href="~/fonts/fontawesome/css/all.css" rel="stylesheet">
+    <link href="~/fonts/opensans/opensans.css" rel="stylesheet">
+    <link href="~/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/css/idangerous.swiper.css" rel="stylesheet">
+    <link href="~/css/magnific-popup.css" rel="stylesheet">
+    <link href="~/img/favicon.ico" rel="shortcut icon">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/responsive.css" rel="stylesheet">
+    <link href="~/css/slick.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">YourDynastySite</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div id="spinner-area">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+            <div class="spinner-txt">загрузка...</div>
+        </div>
+    </div>
+    <!--
+    *******************
+    NAV MENU
+    *******************
+    -->
+    <div class="menu-wrap">
+        <div class="nav-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 col-md-2">
+                        <a href="index.html">
+                            <img src="img/logo.svg" alt="logo Elastic" class="logo-menu">
+                        </a>
+                    </div>
+                    <nav class="col-10 col-md-10">
+                        <div class="navigation float-right">
+                            <button class="menu-toggle">
+                                <span class="icon"></span>
+                                <span class="icon"></span>
+                                <span class="icon"></span>
+                            </button>
+                            <ul class="main-menu nav navbar-nav navbar-right">
+                                <li class="menu-item">
+                                    <a class="active h-stroke" href="index.html">Главная</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="h-stroke" href="about.html">О нас</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="pr-0 mr-0" href="login.html"> <div class="btn btn-default-green-fill question">Войти</div></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
+    </div>
+    <!--
+    *******************
+    NAV MENU MOBILE
+    *******************
+    -->
+    <div class="menu-wrap mobile">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <a href="#"><img src="~/img/logo.svg" alt="logo" class="logo-menu"></a>
+                    <a href="#"><img src="~/img/logo-light.svg" alt="logo Elastic" class="logo-menu logo-responsive"></a>
+                </div>
+                <div class="col-6">
+                    <nav class="nav-menu">
+                        <button id="nav-toggle" class="menu-toggle">
+                            <span class="icon"></span>
+                            <span class="icon"></span>
+                            <span class="icon"></span>
+                        </button>
+                        <ul class="main-menu sec-grad-white-to-grey">
+                            <li class="menu-item">
+                                <a class="#">Главная</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#">О нас</a>
+                            </li>
+                            <li>
+                                <a href="#"><div class="btn btn-default-green-fill mt-3">Войти</div></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @RenderBody()
+
+    <footer class="footer">
+        <img class="logo-bg logo-footer" src="~/img/logo-light.svg" alt="logo">
         <div class="container">
-            &copy; 2022 - YourDynastySite - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <a><img src="img/logo-light.svg" alt="logo" class="logo-footer"></a>
+                        <div class="copyrigh">©2022 НАЗВАНИЕ ПРОЕКТА</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/typed.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/idangerous.swiper.min.js"></script>
+    <script src="~/js/jquery.viewportchecker.min.js"></script>
+    <script src="~/js/jquery.countdown.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/isotope.min.js"></script>
+    <script src="~/js/scripts.js"></script>
 </body>
 </html>

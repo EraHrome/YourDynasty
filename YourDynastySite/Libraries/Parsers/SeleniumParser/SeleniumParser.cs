@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 
-namespace SeleniumParser
+namespace SeleniumParsers
 {
     public class SeleniumParser
     {
@@ -10,14 +10,17 @@ namespace SeleniumParser
         {
         }
 
-        public string GetSiteContent(string url)
+        public string GetSiteContent(string url, string waitXPath)
         {
-            IWebDriver driver = new ChromeDriver();
+            var options = new ChromeOptions();
+            options.AddArgument("--headless");
+            IWebDriver driver = new ChromeDriver(options);
             driver.Navigate().GoToUrl(url);
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            IWebElement firstResult = wait.Until(e => e.FindElement(By.XPath("//body")));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement firstResult = wait.Until(e => e.FindElement(By.XPath(waitXPath)));
+            var html = driver.PageSource;
             driver.Close();
-            return firstResult.Text;
+            return html;
         }
 
     }
