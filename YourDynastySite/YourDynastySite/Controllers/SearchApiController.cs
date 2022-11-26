@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WowPersonParsers.Models;
 using YourDynastySite.Models;
 
 namespace YourDynastySite.Controllers

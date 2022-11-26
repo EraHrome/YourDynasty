@@ -6,6 +6,8 @@
         data.append(pair[0], pair[1]);
     }
 
+    showSpiner();
+
     await fetch('https://localhost:7133/api/search/memorial?' + data, { method: "GET" }).then(async (res) => {
         var container = document.getElementById('memorial-container');
         container.innerHTML = await res.text();
@@ -28,6 +30,8 @@ function initPager() {
             data.append("Page", pageElem.value);
         }
 
+        showSpiner();
+
         await fetch('https://localhost:7133/api/search/memorial?' + data, { method: "GET" }).then(async (res) => {
             var container = document.getElementById('persons-container');
             container.innerHTML += await res.text();
@@ -38,6 +42,13 @@ function initPager() {
 
 function hideSpiner() {
     document.querySelectorAll("#spinner-area")?.forEach(elem => {
-        elem.hidden = true;
+        elem.style.display = 'none';
     });
+}
+
+function showSpiner() {
+    var elem = document.querySelector("#spinner-area");
+    if (elem) {
+        elem.style.display = 'block';
+    }
 }
