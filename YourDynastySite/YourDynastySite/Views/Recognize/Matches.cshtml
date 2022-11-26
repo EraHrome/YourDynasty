@@ -112,7 +112,7 @@
                                                 }
                                                 
                                                 <p class="overview-txt">
-                                                    @($"Вероятность совпадения: {response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == person.face.Face.FaceUuid).Confidence}")
+                                                    @($"Вероятность совпадения: {string.Format("{0:0.###}", response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == person.face.Face.FaceUuid).Confidence)}")
                                                 </p>
                                                 <p class="overview-txt">
                                                     @($"Предположительный возраст на фото: {person.face.Face.Tags.First(tag => tag.Name == "age").Value}")
