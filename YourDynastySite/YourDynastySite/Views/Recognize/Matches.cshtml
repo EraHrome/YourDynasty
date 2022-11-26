@@ -96,11 +96,15 @@
                                     <div class="media">
                                         <img class="media-object" src="@($"data:image/png;base64, {person.face.ImageBase64}")" alt="photo">
                                         <div class="media-body">
-                                            <h4 class="media-heading">@(person.person == null ? "Имя не найдено" : person.person.Name)</h4>
+                                            <h4 class="media-heading">@(person.person == null ? "Имя не найдено" : $"{person.person.Surname} {person.person.Name} {person.person.MiddleName}")</h4>
                                             <div class="text-blog mt-0">
                                                 @if (person.person?.BirthDate.HasValue ?? false)
                                                 {
-                                                    <span>@($"Дата рождения: {person.person?.BirthDate.ToString()}")</span>
+                                                    string dateDescription = person.person?.DeathDate.HasValue ?? false
+                                                        ? $"{person.person?.BirthDate.Value.ToString("dd.MM.yyyy")} - {person.person?.DeathDate.Value.ToString("dd.MM.yyyy")}"
+                                                        : $"Дата рождения: {person.person?.BirthDate.Value.ToString("dd.MM.yyyy")}";
+
+                                                    <span>@dateDescription</span>
                                                 }
                                                 @if (!string.IsNullOrEmpty(person.person?.BirthPlace))
                                                 {
@@ -108,11 +112,16 @@
                                                 }
                                                 
                                                 <p class="overview-txt">
-                                                    @($"Вероятность совпадения: {response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == person.face.Face.FaceUuid).Confidence}")
+                                                    @($"Вероятность совпадения: {string.Format("{0:0.###}", response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == person.face.Face.FaceUuid).Confidence)}")
                                                 </p>
                                                 <p class="overview-txt">
                                                     @($"Предположительный возраст на фото: {person.face.Face.Tags.First(tag => tag.Name == "age").Value}")
                                                 </p>
+
+                                                @if (person.person?.Id != null && person.person?.Id != new Guid())
+                                                {
+                                                    <p class="overview-txt">@($"Id человека: {person.person.Id}")</p>
+                                                }
                                             </div>
                                             <div class="multirow-auto">
                                                 @*<a class="goto-link" href=""> <div style="max-width: 250px" class="btn-listing btn-default-green-fill">На древо</div></a>*@
