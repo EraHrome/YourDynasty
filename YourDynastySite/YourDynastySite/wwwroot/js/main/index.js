@@ -8,7 +8,7 @@
 
     showSpiner();
 
-    await fetch('https://localhost:7133/api/search/memorial?' + data, { method: "GET" }).then(async (res) => {
+    await fetch('/api/search/memorial?' + data, { method: "GET" }).then(async (res) => {
         var container = document.getElementById('memorial-container');
         container.innerHTML = await res.text();
         initPager();
@@ -32,7 +32,7 @@ function initPager() {
 
         showSpiner();
 
-        await fetch('https://localhost:7133/api/search/memorial?' + data, { method: "GET" }).then(async (res) => {
+        await fetch('/api/search/memorial?' + data, { method: "GET" }).then(async (res) => {
             var container = document.getElementById('persons-container');
             container.innerHTML += await res.text();
             hideSpiner();

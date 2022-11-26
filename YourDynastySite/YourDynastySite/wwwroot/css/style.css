@@ -4435,8 +4435,8 @@ a.plans.badge.feat:hover {
     border-top-left-radius: 15px;
 }
 .blog.blog .wrap-blog .media img {
-    max-width: 170px;
-	max-height: 170px;
+    max-width: 200px;
+	max-height: 280px;
 	background-size: 100%;
 }
 .blog.blog .wrap-blog .media-left {

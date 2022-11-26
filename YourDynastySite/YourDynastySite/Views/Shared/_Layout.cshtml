@@ -21,13 +21,6 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
-    <div id="spinner-area">
-        <div class="spinner">
-            <div class="double-bounce1"></div>
-            <div class="double-bounce2"></div>
-            <div class="spinner-txt">загрузка...</div>
-        </div>
-    </div>
     <!--
     *******************
     NAV MENU
@@ -109,7 +102,7 @@
                                 <a href="/">Главная</a>
                             </li>
                             <li class="menu-item">
-                                <a href="@Url.Action("About","Index")">О нас</a>
+                                <a href="@Url.Action("About","Home")">О нас</a>
                             </li>
 
                             @if (!User.Identity.IsAuthenticated)
