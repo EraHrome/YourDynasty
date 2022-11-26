@@ -14,9 +14,9 @@ namespace WowPersonParsers.Clients
         private static string _infoPath = "html/info.htm";
         private static string _baseUri = "http://www.obd-memorial.ru/";
 
-        public ObdMemorialClient()
+        public ObdMemorialClient(string chromiumPath)
         {
-            _selenium = new SeleniumParser();
+            _selenium = new SeleniumParser(chromiumPath);
         }
 
         public async Task<string> GetList(PersonRequestDTO personRequest)

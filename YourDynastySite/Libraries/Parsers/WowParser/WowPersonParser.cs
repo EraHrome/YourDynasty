@@ -9,9 +9,9 @@ namespace WowPersonParsers
     {
         private readonly ObdMemorialClient _obdMemorialClient;
 
-        public WowPersonParser()
+        public WowPersonParser(string chromiumPath)
         {
-            _obdMemorialClient = new();
+            _obdMemorialClient = new(chromiumPath);
         }
 
         public async Task<PersonResponseDTO> GetPersons(PersonRequestDTO personRequest)
