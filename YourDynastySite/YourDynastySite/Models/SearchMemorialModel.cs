@@ -30,5 +30,8 @@ namespace YourDynastySite.Models
 
         [FromQuery]
         public string Rang { get; set; }
+
+        [FromQuery]
+        public int Page { get; set; }
     }
 }
