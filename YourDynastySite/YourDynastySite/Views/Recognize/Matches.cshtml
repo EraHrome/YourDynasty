@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="wrapper">
-                    <div class="heading">Иван Иванов    <i class="fas fa-check"></i></div>
+                    <div class="heading">@User.Identity.Name    <i class="fas fa-check"></i></div>
                     <h3 class="subheding">Премиум-подписка активна до 30.11.2022</h3>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <p class="subtitle">
                             Сохраните память о поколениях и найдите своих родственников
                         </p>
-                        <a href="" class="btn btn btn-default-green-fill">Перейти</a>
+                        <a href="@Url.Action("GenealogyTree", "Recognize")" class="btn btn btn-default-green-fill">Перейти</a>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4">
