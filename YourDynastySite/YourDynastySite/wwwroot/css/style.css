@@ -40,9 +40,6 @@ Version: 1.7
 /*-----------------------------------
     1 - General Styles
 ------------------------------------*/
-html {
-    overflow-x: hidden;
-}
 body {
     overflow-x: hidden;
     background-color: #f6f6f6;
