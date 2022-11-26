@@ -19,6 +19,8 @@ namespace WowPersonParsers
         public async Task<PersonResponseDTO> GetPersons(PersonRequestDTO personRequest)
         {
             PersonResponseDTO personResponse = new();
+            personResponse.Persons = new List<Person>();
+            var persons = personResponse.Persons;
 
             try
             {
@@ -27,28 +29,57 @@ namespace WowPersonParsers
                 {
                     HtmlDocument doc = new();
                     doc.LoadHtml(content);
-                    var nodes = doc.DocumentNode.SelectNodes("//[@class='search-result']");
-                    foreach (var node in nodes)
+                    var nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'search-result')]");
+                    var resNodes = nodes.Where(x => !String.IsNullOrWhiteSpace(x.Id));
+                    foreach (var node in resNodes)
                     {
                         var infoContent = await _obdMemorialClient.GetInfo(node.Id);
                         if (!string.IsNullOrEmpty(infoContent))
                         {
-                            string json = string.Empty;
                             HtmlDocument docInfo = new();
-                            docInfo.LoadHtml(content);
-                            var nodeInfos = doc.DocumentNode.SelectNodes("//[@class='card_parameter']");
-                            foreach (var info in nodeInfos)
+                            docInfo.LoadHtml(infoContent);
+                            var nodeInfos = docInfo.DocumentNode.SelectNodes("//div[contains(@class, 'card_parameter')]");
+                            if (nodeInfos != null)
                             {
-                                var nameProp = info.SelectSingleNode("//[@class='card_param-title']").InnerText.GetPropName();
-                                var value = info.SelectSingleNode("//[@class='card_param-result']").InnerText;
-                                json += $"\"{nameProp}\":\"{value}\"";
-                            }
-
-                            var result = JsonConvert.DeserializeObject<Person>($"{{{json}}}");
-                            if (result is not null)
-                            {
-                                result.Id = node.Id;
-                                personResponse.Persons.Add(result);
+                                var person = new Person();
+                                foreach (var info in nodeInfos)
+                                {
+                                    var nameProp = info.SelectSingleNode(".//span[contains(@class, 'card_param-title')]").InnerText.Trim();
+                                    var value = info.SelectSingleNode(".//span[contains(@class, 'card_param-result')]").InnerText.Trim();
+                                    switch (nameProp)
+                                    {
+                                        case "Фамилия":
+                                            person.Surname = value;
+                                            break;
+                                        case "Имя":
+                                            person.Name = value;
+                                            break;
+                                        case "Отчество":
+                                            person.MiddleName = value;
+                                            break;
+                                        case "Дата рождения/Возраст":
+                                            person.Birthday = value;
+                                            break;
+                                        case "Место рождения":
+                                            person.Birthplace = value;
+                                            break;
+                                        case "Дата и место призыва":
+                                            person.Birthplace = value;
+                                            break;
+                                        case "Место службы":
+                                            person.LastDutyStation = value;
+                                            break;
+                                        case "Воинское звание":
+                                            person.Rank = value;
+                                            break;
+                                        case "Название источника донесения":
+                                            person.Source = value;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                                persons.Add(person);
                             }
                         }
                     }

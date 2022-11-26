@@ -77,6 +77,6 @@ namespace WowPersonParsers.Models.Dtos
         public string FullText { get; set; }
 
         [JsonProperty("ps=")]
-        public int PageSize { get; } = 100;
+        public int PageSize { get; } = 10;
     }
 }

@@ -1,13 +1,14 @@
-﻿using Newtonsoft.Json;
-using System.Reflection;
+﻿using WowPersonParsers.Models.Dtos;
 using WowPersonParser.Clients;
-using WowPersonParsers.Models.Dtos;
+using System.Reflection;
+using Newtonsoft.Json;
+using SeleniumParsers;
 
 namespace WowPersonParsers.Clients
 {
     public class ObdMemorialClient: IObdMemorialClient
     {
-        private readonly HttpClient _httpClient;
+        private readonly SeleniumParser _selenium;
 
         private readonly string _searchPath = "html/search.htm";
         private readonly string _infoPath = "html/info.htm";
@@ -15,31 +16,21 @@ namespace WowPersonParsers.Clients
 
         public ObdMemorialClient()
         {
-            _httpClient = new HttpClient();
+            _selenium = new SeleniumParser();
         }
 
         public async Task<string> GetList(PersonRequestDTO personRequest)
         {
-            string content = string.Empty;
-
-            var searchResponse = await _httpClient.GetAsync($"{_baseUri}{_searchPath}?{BuildQueryString(personRequest)}");
-            if (searchResponse?.IsSuccessStatusCode ?? false)
-            {
-                content = await searchResponse.Content.ReadAsStringAsync();
-            }
+            var url = $"{_baseUri}{_searchPath}?{BuildQueryString(personRequest)}";
+            var content = await Task.FromResult(_selenium.GetSiteContent(url, "//div[contains(@class, 'search-result__col-text-and-icons')]"));
 
             return content;
         }
 
         public async Task<string> GetInfo(string id)
         {
-            string content = string.Empty;
-
-            var searchResponse = await _httpClient.GetAsync($"{_baseUri}{_infoPath}?id={id}");
-            if (searchResponse?.IsSuccessStatusCode ?? false)
-            {
-                content = await searchResponse.Content.ReadAsStringAsync();
-            }
+            var url = $"{_baseUri}{_infoPath}?id={id}";
+            var content = await Task.FromResult(_selenium.GetSiteContent(url, "//div[contains(@class, 'card_parameter')]"));
 
             return content;
         }
