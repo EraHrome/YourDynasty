@@ -70,33 +70,67 @@
     </div>
 </section>
 
-<div class="overview sec-normal sec-bg1">
+<section class="shopping blog">
     <div class="container">
-        <h3 class="testimonials wrapper heading">Результат поиска совпадений:</h3>
-        <p>Нашли этого человека среди ранее загруженных результатов?</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="wrap-blog">
 
-        @if (response != null)
-        {
-            @foreach (var face in Model.Faces)
-            {
-                <div class="row">
-                    <div class="col-sm-12 col-md-4">
-                        <div class="img-over sec-grad-grey-to-grey">
-                            <img src="@($"data:image/png;base64, {@face.ImageBase64}")" alt="">
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-8">
-                        <div class="overview-info">
-                            <h2 class="section-heading">@($"Вероятность совпадения: {response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == face.Face.FaceUuid).Confidence}")</h2>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 mb-80">
+                            <div class="heading comment">Мы нашли N подходящих людей:</div>
+                            <div class="line"></div>
 
-                            <p class="overview-txt">
-                                @($"Возраст: {face.Face.Tags.First(tag => tag.Name == "age").Value}")
-                            </p>
+                            @if (response != null)
+                            {
+                                @foreach (var person in Model.Persons)
+                                {
+                                    <div class="media">
+                                        <img class="media-object" src="@($"data:image/png;base64, {person.face.ImageBase64}")" alt="photo">
+                                        <div class="media-body">
+                                            <h4 class="media-heading">@(person.person == null ? "Имя не найдено" : person.person.Name)</h4>
+                                            <div class="text-blog mt-0">
+                                                <span>12.02.1999 г.р., Пензенская обл., Башмаковский р-н - спаршено откуда-то</span>
+                                                <p class="overview-txt">
+                                                    @($"Вероятность совпадения: {response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == person.face.Face.FaceUuid).Confidence}")
+                                                </p>
+                                                <p class="overview-txt">
+                                                    @($"Предположительный возраст на фото: {person.face.Face.Tags.First(tag => tag.Name == "age").Value}")
+                                                </p>
+                                            </div>
+                                            <div class="multirow-auto">
+                                                <a class="goto-link" href=""> <div style="max-width: 250px" class="btn-listing btn-default-green-fill">На древо</div></a>
+                                                <a class="goto-link" href="https://obd-memorial.ru/html/info.htm?id=5420874"> <div class="btn-listing btn-default-green-fill">Источник</div></a>
+                                                <a class="goto-link" href=""> <div style="max-width: 100px" class="btn-listing btn-default-green-fill" person-form-btn="@person.face.Face.FaceUuid">Дополнить</div></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <form class="comments-form" person-additional-form="@person.face.Face.FaceUuid" action="@Url.Action("AddPerson", "Recognize")" hidden>
+                                        <div class="multirow">
+                                            <input id="middlename" type="text" name="middlename" placeholder="Фамилия" class="input tripleline" required>
+                                            <input id="firstname" type="text" name="firstname" placeholder="Имя" class="input tripleline" required>
+                                            <input id="surname" type="text" name="surname" placeholder="Отчество" class="input tripleline" required>
+                                        </div>
+                                        <div class="multirow">
+                                            <input id="birthplace" type="text" name="birthplace" placeholder="Дата рождения" class="input doubleline" required>
+                                            <input id="birthdate" type="text" name="birthdate" placeholder="Место рождения" class="input doubleline" required>
+                                        </div>
+                                        <div class="multirow">
+                                            <input id="deathplace" type="text" name="deathplace" placeholder="Дата смерти" class="input tripleline" required>
+                                            <input id="burialregion" type="text" name="burialregion" placeholder="Регион захоронения" class="input tripleline" required>
+                                            <input id="burialplace" type="text" name="burialplace" placeholder="Место захоронения" class="input tripleline" required>
+                                        </div>
+                                        <input id="form-submit" type="submit" style="max-width: 125px" class="btn-listing btn-default-green-fill" value="Сохранить">
+                                    </form>
+                                }
+                            }
+                            @*<a href="" class="btn btn-default-green-fill">Загрузить еще</a>*@
                         </div>
                     </div>
                 </div>
-            }
-        }
-
+            </div>
+        </div>
     </div>
-</div>
+</section>

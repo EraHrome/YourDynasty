@@ -1,5 +1,8 @@
 ﻿using IO.Swagger.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using YourDynastySite.Database.Contexts;
+using YourDynastySite.Database.Entities;
 using YourDynastySite.Models;
 using YourDynastySite.Services.Interfaces;
 
@@ -9,12 +12,17 @@ namespace YourDynastySite.Controllers
     {
         private readonly IDynastyService _dynastyService;
 
+        private readonly ApplicationContext _context;
+
         private const string _dbName = "yourdynasty.com";
         private const string _allNames = "all";
 
-        public RecognizeController(IDynastyService dynastyService)
+        public RecognizeController(
+            IDynastyService dynastyService, 
+            ApplicationContext context)
         {
             _dynastyService = dynastyService;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -70,34 +78,36 @@ namespace YourDynastySite.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction(nameof(AddPersonForm), faceId);
+                return RedirectToAction(nameof(AddPerson), faceId);
             }
 
             if (recognize?.Results == null || recognize.Results.Count == 0)
             {
-                return RedirectToAction(nameof(AddPersonForm));
+                return RedirectToAction(nameof(AddPerson));
             }
 
             List<Guid> facesIds = recognize.Results.Where(recognize => recognize.FaceUuid.HasValue && recognize.FaceUuid == faceId)
                 .FirstOrDefault().Matches.Where(match => match.FaceUuid.HasValue).Select(match => match.FaceUuid.Value).ToList();
 
-            List<CroppedFace> faces = new();
+            List<(CroppedFace face, DynastyPerson Person)> persons = new();
             foreach (var face in facesIds)
             {
-                faces.Add(await _dynastyService.GetCroppedFace(face));
+                CroppedFace croppedFace = await _dynastyService.GetCroppedFace(face);
+                DynastyPerson person = await _context.DynastyPersons.FirstOrDefaultAsync(p => p.FatherId == face);
+                persons.Add((croppedFace, person));
             }
 
             MatchesResultModel viewModel = new MatchesResultModel()
             {
                 FaceId = faceId,
                 Recognize = recognize,
-                Faces = faces
+                Persons = persons
             };
 
             return View(viewModel);
         }
 
-        public async Task<IActionResult> AddPersonForm(Guid faceId)
+        public async Task<IActionResult> AddPerson(DynastyPerson person)
         {
 
 
