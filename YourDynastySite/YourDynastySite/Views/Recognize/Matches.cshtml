@@ -6,17 +6,33 @@
     var response = Model.Recognize;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Результат поиска совпадений</h1>
-    <p>Нашли этого человека?</p>
+<div class="overview sec-normal sec-bg1">
+    <div class="container">
+        <h3 class="testimonials wrapper heading">Результат поиска совпадений:</h3>
+        <p>Нашли этого человека среди ранее загруженных результатов?</p>
 
-    @if (response != null)
-    {
-        @foreach (var face in Model.Faces)
+        @if (response != null)
         {
-            <img src="@($"data:image/png;base64, {@face.ImageBase64}")" />
+            @foreach (var face in Model.Faces)
+            {
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="img-over sec-grad-grey-to-grey">
+                            <img src="@($"data:image/png;base64, {@face.ImageBase64}")" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-8">
+                        <div class="overview-info">
+                            <h2 class="section-heading">@($"Вероятность совпадения: {response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == face.Face.FaceUuid).Confidence}")</h2>
+
+                            <p class="overview-txt">
+                                @($"Возраст: {face.Face.Tags.First(tag => tag.Name == "age").Value}")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
         }
-    }
 
+    </div>
 </div>
-

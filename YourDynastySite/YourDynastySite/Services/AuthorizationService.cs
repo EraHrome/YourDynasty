@@ -38,6 +38,7 @@ namespace YourDynastySite.Services
                         if (userToken != null)
                         {
                             _context.AuthorizationTokens.Remove(userToken);
+                            await _context.SaveChangesAsync();
                         }
                         var guid = Guid.NewGuid();
                         var token = _tokenHasher.HashToken(request.Password, guid.ToString());

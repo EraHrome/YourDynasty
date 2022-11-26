@@ -35,7 +35,9 @@ namespace YourDynastySite.Middlewares
                 return await Task.FromResult(AuthenticateResult.Fail($"Missing Cookie For Token: {Options.TokenName}"));
 
             var token = Request.Cookies[Options.TokenName];
-            var tokenModel = await _dbSet.FirstOrDefaultAsync(x => x.Token == token);
+            var tokenModel = await _dbSet
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.Token == token);
 
             if (tokenModel == null)
             {
