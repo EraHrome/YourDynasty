@@ -70,7 +70,7 @@
                                 else
                                 {
                                     <li class="menu-item">
-                                        <a class="h-stroke" href="/registration">Выйти</a>
+                                        <a class="h-stroke" href="/exit">Выйти</a>
                                     </li>
                                     <li class="menu-item">
                                         <a class="pr-0 mr-0" href="/profile">
@@ -106,14 +106,34 @@
                         </button>
                         <ul class="main-menu sec-grad-white-to-grey">
                             <li class="menu-item">
-                                <a class="/">Главная</a>
+                                <a href="/">Главная</a>
                             </li>
                             <li class="menu-item">
                                 <a href="@Url.Action("About","Index")">О нас</a>
                             </li>
-                            <li>
-                                <a href="/login"><div class="btn btn-default-green-fill mt-3">Войти</div></a>
-                            </li>
+
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li class="menu-item">
+                                    <a href="/registration">Регистрация</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="pr-0 mr-0" href="/login">
+                                        <div class="btn btn-default-green-fill mt-3">Войти</div>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="menu-item">
+                                    <a href="/exit">Выйти</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="pr-0 mr-0" href="/profile">
+                                        <div class="btn btn-default-green-fill mt-3">Личный кабинет</div>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </nav>
                 </div>

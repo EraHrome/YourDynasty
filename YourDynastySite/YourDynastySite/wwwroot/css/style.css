@@ -4128,8 +4128,8 @@ a.plans.badge.feat:hover {
 }
 .accordion.faq .panel-title.active {
     font-weight: 700;
-    color: #3eb1fc !important;
-    border-bottom: solid 1px #a3d133;
+    color: #ffb142 !important;
+    border-bottom: solid 1px #2f3640;
 }
 .accordion.faq .panel-title.active .fa-minus {
     display: inline-block;
@@ -6809,7 +6809,7 @@ a.btn i.icon-cart {
         visibility: visible;
     }
     .nav-menu .main-menu > .menu-item:hover > a {
-        color: #a3d133;
+        color: #ffb142;
         background-color: transparent;
     }
     .nav-menu .main-menu a {
