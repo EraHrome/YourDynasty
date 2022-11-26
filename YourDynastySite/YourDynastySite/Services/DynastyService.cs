@@ -68,7 +68,7 @@ namespace YourDynastySite.Services
             => await _personService.V2PersonGetAsync(_apiKey, _apiSecret, persons);
 
         public async Task<Recognize> Recognize(IEnumerable<Guid> faces, List<string>? targets = null)
-            => await _recognizeService.V2RecognizePostAsync(new(_apiKey, faces.Select(faceId => (Guid?)faceId).ToList(), targets));
+            => await _recognizeService.V2RecognizePostAsync(new(_apiKey, faces.Select(faceId => (Guid?)faceId).ToList(), targets ?? new()));
 
         public async Task<ApiResponse<object>> GetRecognize(Guid recognizeId)
             => await _recognizeService.V2RecognizeGetAsyncWithHttpInfo(_apiKey, recognizeId);

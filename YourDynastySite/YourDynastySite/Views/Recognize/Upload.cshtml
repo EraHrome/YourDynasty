@@ -15,7 +15,9 @@
         @*<img src="@($"data:image/png;base64, {@Model.Image}")" />*@
         @foreach (var face in Model.Faces)
         {
-            <img src="@($"data:image/png;base64, {@face.ImageBase64}")" />
+            <a href="@($"/Recognize/Matches/?faceId={face.Face.FaceUuid}")">
+                <img src="@($"data:image/png;base64, {@face.ImageBase64}")" />
+            </a>
         }
     }
 

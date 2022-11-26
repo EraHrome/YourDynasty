@@ -34,7 +34,7 @@ namespace YourDynastySite.Controllers
 
             List<Guid> facesIds = response.Media.Faces.Where(face => face.FaceUuid.HasValue).Select(face => face.FaceUuid.Value).ToList();
 
-            List<CroppedFace> faces = new List<CroppedFace>();
+            List<CroppedFace> faces = new();
             foreach (var faceId in facesIds)
             {
                 faces.Add(await _dynastyService.GetCroppedFace(faceId));
@@ -50,8 +50,37 @@ namespace YourDynastySite.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Matches()
+        public async Task<IActionResult> Matches(Guid faceId)
         {
+            Recognize recognize = await _dynastyService.Recognize(new List<Guid>() { faceId });
+
+            if (recognize?.Results == null || recognize.Results.Count == 0)
+            {
+                return RedirectToAction(nameof(AddPersonForm));
+            }
+
+            List<Guid> facesIds = recognize.Results.Where(recognize => recognize.FaceUuid.HasValue).Select(face => face.FaceUuid.Value).ToList();
+
+            List<CroppedFace> faces = new();
+            foreach (var face in facesIds)
+            {
+                faces.Add(await _dynastyService.GetCroppedFace(face));
+            }
+
+            MatchesResultModel viewModel = new MatchesResultModel()
+            {
+                FaceId = faceId,
+                Recognize = recognize,
+                Faces = faces
+            };
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> AddPersonForm(Guid faceId)
+        {
+
+
             return View();
         }
     }
