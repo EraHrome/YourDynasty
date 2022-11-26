@@ -10,6 +10,7 @@
         var container = document.getElementById('memorial-container');
         container.innerHTML = await res.text();
         initPager();
+        hideSpiner();
     });
 });
 
@@ -28,8 +29,15 @@ function initPager() {
         }
 
         await fetch('https://localhost:7133/api/search/memorial?' + data, { method: "GET" }).then(async (res) => {
-            var container = document.getElementById('memorial-container');
+            var container = document.getElementById('persons-container');
             container.innerHTML += await res.text();
+            hideSpiner();
         });
+    });
+}
+
+function hideSpiner() {
+    document.querySelectorAll("#spinner-area")?.forEach(elem => {
+        elem.hidden = true;
     });
 }
