@@ -1,7 +1,5 @@
 ﻿using HtmlAgilityPack;
-using Newtonsoft.Json;
 using WowPersonParsers.Clients;
-using WowPersonParsers.Helpers;
 using WowPersonParsers.Models;
 using WowPersonParsers.Models.Dtos;
 
