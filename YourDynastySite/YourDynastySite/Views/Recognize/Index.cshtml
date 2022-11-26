@@ -1,10 +1,20 @@
-﻿@{
+﻿@model RecognizeUploadModel;
+
+@{
     ViewData["Title"] = "Recognize Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Загрузите изобраение</h1>
 
-
+    @using (Html.BeginForm("Upload", "Recognize", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            @Html.LabelFor(x => x.File)
+            @Html.TextBoxFor(x => x.File, new { type = "file" })
+            @Html.ValidationMessageFor(x => x.File)
+        </div>
+        <button type="sybmit">Upload</button>
+    }
 
 </div>

@@ -1,10 +1,23 @@
-﻿@{
+﻿@model UploadResultViewModel
+
+@{
     ViewData["Title"] = "Recognize Page";
+
+    var response = Model.Response;
 }
 
 <div class="text-center">
     <h1 class="display-4">Результат распознавания</h1>
+    <p>Выберите человека для поиска</p>
 
-
+    @if (response != null)
+    {
+        @*<img src="@($"data:image/png;base64, {@Model.Image}")" />*@
+        @foreach (var face in Model.Faces)
+        {
+            <img src="@($"data:image/png;base64, {@face.ImageBase64}")" />
+        }
+    }
 
 </div>
+
