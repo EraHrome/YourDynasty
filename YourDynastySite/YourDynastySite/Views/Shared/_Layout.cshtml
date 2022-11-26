@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-2 col-md-2">
                         <a href="index.html">
-                            <img src="img/logo.svg" alt="logo Elastic" class="logo-menu">
+                            <img src="~/img/logo.svg" alt="logo Elastic" class="logo-menu">
                         </a>
                     </div>
                     <nav class="col-10 col-md-10">
@@ -49,14 +49,37 @@
                             </button>
                             <ul class="main-menu nav navbar-nav navbar-right">
                                 <li class="menu-item">
-                                    <a class="active h-stroke" href="index.html">Главная</a>
+                                    <a class="active h-stroke" href="/">Главная</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="h-stroke" href="about.html">О нас</a>
+                                    <a class="h-stroke" href="@Url.Action("About","Home")">О нас</a>
                                 </li>
-                                <li class="menu-item">
-                                    <a class="pr-0 mr-0" href="login.html"> <div class="btn btn-default-green-fill question">Войти</div></a>
-                                </li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li class="menu-item">
+                                        <a class="pr-0 mr-0" href="/login">
+                                            <div class="btn btn-default-green-fill question">Войти</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a class="pr-0 mr-0" href="/registration">
+                                            <div class="btn btn-default-green-fill question">Регистрация</div>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="menu-item">
+                                        <a class="pr-0 mr-0" href="#">
+                                            <div class="btn btn-default-green-fill question">Личный кабинет</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a class="pr-0 mr-0" href="@Url.ActionLink("Exit","Login")">
+                                            <div class="btn btn-default-green-fill question">Регистрация</div>
+                                        </a>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </nav>
@@ -85,13 +108,13 @@
                         </button>
                         <ul class="main-menu sec-grad-white-to-grey">
                             <li class="menu-item">
-                                <a class="#">Главная</a>
+                                <a class="/">Главная</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#">О нас</a>
+                                <a href="@Url.Action("About","Index")">О нас</a>
                             </li>
                             <li>
-                                <a href="#"><div class="btn btn-default-green-fill mt-3">Войти</div></a>
+                                <a href="/login"><div class="btn btn-default-green-fill mt-3">Войти</div></a>
                             </li>
                         </ul>
                     </nav>
@@ -108,7 +131,7 @@
             <div class="footer-top">
                 <div class="row">
                     <div class="col-sm-6 col-md-3">
-                        <a><img src="img/logo-light.svg" alt="logo" class="logo-footer"></a>
+                        <a><img src="~/img/logo-light.svg" alt="logo" class="logo-footer"></a>
                         <div class="copyrigh">©2022 НАЗВАНИЕ ПРОЕКТА</div>
                     </div>
                 </div>

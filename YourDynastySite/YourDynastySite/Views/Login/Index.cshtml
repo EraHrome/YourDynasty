@@ -1,0 +1,42 @@
+﻿@model string?
+
+<p id="nav-toggle">
+    </p>
+    <!-- 
+    *******************
+    FULL LOGIN PAGE
+    ******************* 
+    -->
+    <div class="fullrock total-grad-pink-blue-intense">
+      <a onclick="window.history.go(-1); return false;" class="closebtn">
+        <img src="~/img/closer.svg" class="closer" alt="">
+      </a>
+      <div class="fullrock-content">
+        <section class="pb-100">
+          <div class="register contact-us">
+            <div class="container">
+              <img src="~/img/logo.svg" alt="logo" class="logo-footer">
+              <div class="row">
+                <div class="col-md-12 col-lg-12">
+                  <div class="form-contact sec-grad-white-to-green">
+                    <h1 class="subtitle mb-1">Вход</h1>
+                    <p>Ещё нет аккаунта? <a class="golink" href="@Url.ActionLink("Index", "Registration")">Зарегистрируйтесь</a>
+                    </p>
+                    <form method="post" action="@Url.ActionLink("Login", "Login")" class="comments-form">
+                      <input type="hidden" name="Redirect" class="form-control" value="@Model" />
+                      <input type="email" name="username" placeholder="Адрес электронной почты" class="input" required />
+                      <input type="password" name="password" placeholder="Пароль" class="input" required />
+                      <div class="pb-3">
+                        <a href="#" class="link">Забыли пароль?</a>
+                      </div>
+                      <input type="submit" class="btn btn-default-blue-fill" value="Войти">
+                      <div id="msgSubmit" class="h4 text-right hidden"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
