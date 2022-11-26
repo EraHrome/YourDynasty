@@ -106,9 +106,21 @@ namespace YourDynastySite.Controllers
 
         public async Task<IActionResult> GenealogyTree(Guid personId)
         {
+            Guid test1 = Guid.NewGuid();
+            Guid test2 = Guid.NewGuid();
+            Guid test3 = Guid.NewGuid();
 
+            GenealogyTreeModel veiwModel = new()
+            {
+                Persons = new()
+                {
+                    new(){ Id = test1, PartnerId = test2, Name = "Test1", FaceId = test1, Gender = 0},
+                    new(){ Id = test2, PartnerId = test1, Name = "Test2", FaceId = test1, Gender = 1},
+                    new(){ Id = test3, FatherId = test1, MotherId = test2, Name = "Test3", FaceId = test1, Gender = 0},
+                }
+            };
 
-            return View();
+            return View(veiwModel);
         }
     }
 }

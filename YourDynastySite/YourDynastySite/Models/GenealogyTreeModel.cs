@@ -4,6 +4,6 @@ namespace YourDynastySite.Models
 {
     public class GenealogyTreeModel
     {
-        public DynastyPerson Person { get; set; }
+        public List<DynastyPerson> Persons { get; set; }
     }
 }
