@@ -19,7 +19,14 @@
                         <h3 class="subheading">
                             Узнай свою родословную<br>
                         </h3>
-                        <a href="#" class="btn btn-default-green-fill mr-3">Войти</a>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a href="/registration" class="btn btn-default-green-fill mr-3">Регистрация</a>
+                        }
+                        else
+                        {
+                            <a href="/profile" class="btn btn-default-green-fill mr-3">Начать поиск</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -37,7 +44,14 @@
                         <h3 class="subheading">
                             Найди человека ВКонтакте по фото<br>
                         </h3>
-                        <a href="login.html" class="btn btn-default-green-fill mr-3">Войти</a>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a href="/registration" class="btn btn-default-green-fill mr-3">Регистрация</a>
+                        }
+                        else
+                        {
+                            <a href="/profile" class="btn btn-default-green-fill mr-3">Начать поиск</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -57,7 +71,14 @@
                         <h3 class="subheading">
                             Интеграция с банком данных «Мемориал»<br>
                         </h3>
-                        <a href="login.html" class="btn btn-default-green-fill mr-3">Войти</a>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a href="/registration" class="btn btn-default-green-fill mr-3">Регистрация</a>
+                        }
+                        else
+                        {
+                            <a href="/profile" class="btn btn-default-green-fill mr-3">Начать поиск</a>
+                        }
                     </div>
                 </div>
             </div>

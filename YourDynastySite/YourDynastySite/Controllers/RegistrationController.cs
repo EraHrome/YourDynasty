@@ -30,7 +30,7 @@ namespace Forum.Areas.User
             {
                 return RedirectToAction("Index", "Registration", new { isNotSuccess = true });
             };
-            return View("Home");
+            return View("~/Views/Login/Index.cshtml");
         }
     }
 }
