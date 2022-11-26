@@ -8,15 +8,19 @@
 
 <div class="text-center">
     <h1 class="display-4">Результат поиска совпадений</h1>
-    <p>Нашли этого человека?</p>
+    <p>Нашли этого человека среди ранее загруженных результатов?</p>
 
     @if (response != null)
     {
         @foreach (var face in Model.Faces)
         {
             <img src="@($"data:image/png;base64, {@face.ImageBase64}")" />
+            <p>@($"{@response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == face.Face.FaceUuid).Confidence}\nВозраст: {face.Face.Tags.First(tag => tag.Name == "age").Value}")</p>
         }
     }
+
+    <p>Не нашли совпадений? Добавьте информацию о человеке</p>
+    <a href="@($"/Recognize/AddPersonForm/?faceId={Model.FaceId}")">Добавить</a>
 
 </div>
 

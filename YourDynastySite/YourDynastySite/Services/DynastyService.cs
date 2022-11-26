@@ -19,6 +19,12 @@ namespace YourDynastySite.Services
         private readonly Guid _apiKey;
         private readonly Guid _apiSecret;
 
+        private readonly List<string> _defaultDatabases = new()
+        {
+            "all@celebrities.betaface.com",
+            "all@part01.wikipedia.org",
+        };
+
         private const string _serviceConfigConst = "DynastyApi";
         private const string _apiKeyConst = "api_key";
         private const string _apiSecretConst = "api_secret";
@@ -65,10 +71,10 @@ namespace YourDynastySite.Services
             => await _personService.V2PersonPostAsync(new(_apiKey, faces.Select(faceId => (Guid?)faceId).ToList(), person));
 
         public async Task<List<Person>> GetPersonsFaces(List<string> persons)
-            => await _personService.V2PersonGetAsync(_apiKey, _apiSecret, persons);
+            => await _personService.V2PersonGetAsync(_apiKey, _apiSecret, persons.Union(_defaultDatabases).ToList());
 
         public async Task<Recognize> Recognize(IEnumerable<Guid> faces, List<string>? targets = null)
-            => await _recognizeService.V2RecognizePostAsync(new(_apiKey, faces.Select(faceId => (Guid?)faceId).ToList(), targets ?? new()));
+            => await _recognizeService.V2RecognizePostAsync(new(_apiKey, faces.Select(faceId => (Guid?)faceId).ToList(), targets.Union(_defaultDatabases).ToList() ?? _defaultDatabases));
 
         public async Task<ApiResponse<object>> GetRecognize(Guid recognizeId)
             => await _recognizeService.V2RecognizeGetAsyncWithHttpInfo(_apiKey, recognizeId);
