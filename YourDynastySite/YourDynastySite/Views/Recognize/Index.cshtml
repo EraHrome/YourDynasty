@@ -4,24 +4,97 @@
     ViewData["Title"] = "Recognize Page";
 }
 
-<div class="overview sec-normal sec-bg1">
+<!--
+    *******************
+    SLIDER
+    *******************
+    -->
+<div class="top-header">
+    <div class="total-grad"></div>
     <div class="container">
-        <h3 class="testimonials wrapper heading">На нашем портале вы найдете:</h3>
         <div class="row">
-            <div class="text-center">
-                <h1 class="display-4">Загрузите изобраение</h1>
-
-                @using (Html.BeginForm("Upload", "Recognize", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <div>
-                        @Html.LabelFor(x => x.File)
-                        @Html.TextBoxFor(x => x.File, new { type = "file" })
-                        @Html.ValidationMessageFor(x => x.File)
+            <div class="col-lg-12">
+                <div class="specs">
+                    <div class="">
+                        <img src="~/img/avatars/avatar3.png" height="42" alt="">
                     </div>
-                    <button type="submit">Upload</button>
-                }
-
+                </div>
+                <div class="wrapper">
+                    <div class="heading">Иван Иванов    <i class="fas fa-check"></i></div>
+                    <h3 class="subheding">Премиум-подписка активна до 30.11.2022</h3>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!--
+    *******************
+    WHY CHOOSE ELASTIC
+    *******************
+    -->
+<section class="services classic sec-uping">
+    <div class="container">
+        <div class="service-wrap">
+            <div class="row">
+                <div class="col-sm-1 col-md-4">
+                    <div class="service-section">
+                        <div class="title">Генеалогическое древо</div>
+                        <p class="subtitle">
+                            Сохраните память о поколениях и найдите своих родственников
+                        </p>
+                        <a href="" class="btn btn btn-default-green-fill">Перейти</a>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="service-section-action service-section">
+                        <div class="title">Поиск по фото</div>
+                        <p class="subtitle">
+                            Ищите людей в социальных сетях с помощью фотографий
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="service-section">
+                        <div class="plans badge feat bg-green">Новое</div>
+                        <div class="title">Запрос архивов</div>
+                        <p class="subtitle">
+                            Найдите данные о родственниках в открытых банках данных
+                        </p>
+                        <a href="" class="btn btn btn-default-green-fill">Перейти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+*******************
+TIPOGRAPHY
+*******************
+-->
+<section class="tipography-ex sec-normal">
+    <div class="container">
+        <p>Загрузите фотографию с вашего устройства, чтобы осуществить поиск.</p>
+        @using (Html.BeginForm("Upload", "Recognize", FormMethod.Post, new { enctype = "multipart/form-data",  @class = "btn btn-default-green-fill" }))
+        {
+            <div>
+                @Html.LabelFor(x => x.File)
+                @Html.TextBoxFor(x => x.File, new { type = "file" })
+                @Html.ValidationMessageFor(x => x.File)
+            </div>
+            <button type="submit">Загрузить</button>
+        }
+    </div>
+</section>
+
+@*<!--
+*******************
+TIPOGRAPHY
+*******************
+-->
+<section class="tipography-ex sec-normal">
+    <div class="container">
+        <p>Вы загрузили фотографию: <span style="color: #ffb142;">image1.png</span></p>
+        <a href="" class="btn btn-default-green-fill">Найти</a>
+    </div>
+</section>*@
