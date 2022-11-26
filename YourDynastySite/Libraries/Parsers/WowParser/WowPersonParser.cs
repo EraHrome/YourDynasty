@@ -90,6 +90,10 @@ namespace WowPersonParsers
                 personResponse.IsSuccess = false;
                 personResponse.Exception = ex.Message;
             }
+            finally
+            {
+                _obdMemorialClient.CloseConnection();
+            }
 
             return personResponse;
         }
