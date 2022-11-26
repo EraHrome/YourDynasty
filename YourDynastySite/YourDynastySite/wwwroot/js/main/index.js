@@ -8,10 +8,7 @@
 
     var items = await fetch('https://localhost:7133/api/search/memorial?' + data,
         {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            method: "GET"
         }).then(async (res) => {
             return await res.json();
     }).catch(() => '');
