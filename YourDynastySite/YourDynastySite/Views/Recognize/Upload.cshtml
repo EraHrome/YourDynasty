@@ -92,7 +92,7 @@
                 <div class="col-sm-12 col-md-4">
                   <div class="wrapper">
                     <div class="team-info">
-                        <a href="@($"/Recognize/Matches/?faceId={face.Face.FaceUuid}")">
+                        <a class="face_info" href="@($"/Recognize/Matches/?faceId={face.Face.FaceUuid}")">
                       <img src="@($"data:image/png;base64, {@face.ImageBase64}")" alt="team">
                        </a>
                     </div>
@@ -104,3 +104,7 @@
     </div>
     </div>
 </section>
+<script>
+    document.querySelectorAll('.face_info')?.addEventListener('click', (ev) => {
+        showSpiner();
+    });</script>

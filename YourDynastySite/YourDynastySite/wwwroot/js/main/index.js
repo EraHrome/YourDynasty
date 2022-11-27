@@ -40,6 +40,17 @@ function initPager() {
     });
 }
 
+document.getElementById('submit_photo')?.addEventListener('click', (ev) => {
+    showSpiner();
+    initFaceInfo();
+});
+
+function initFaceInfo() {
+    document.querySelectorAll('.face_info')?.addEventListener('click', (ev) => {
+        showSpiner();
+    });
+}
+
 function hideSpiner() {
     document.querySelectorAll("#spinner-area")?.forEach(elem => {
         elem.style.display = 'none';
