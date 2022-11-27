@@ -12,7 +12,7 @@ namespace YourDynastySite.Controllers
         /// Страница поиска людей в сервисе obd memorial
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        //[Authorize]
         [HttpGet("search/memorial")]
         public async Task<IActionResult> Memorial(SearchMemorialModel model)
         {
