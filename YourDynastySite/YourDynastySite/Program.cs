@@ -28,6 +28,12 @@ services.AddScoped<WowPersonParsers.WowPersonParser>(x => new("chromedriver.exe"
 
 services.AddTransient<IDynastyService, DynastyService>();
 
+services.AddRouting(op =>
+{
+    op.LowercaseUrls = true;
+    op.LowercaseQueryStrings = false;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
