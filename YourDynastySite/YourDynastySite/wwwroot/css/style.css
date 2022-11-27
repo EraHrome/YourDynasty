@@ -3021,6 +3021,9 @@ a.plans.badge.feat {
         margin-bottom: 350px !important;
         margin-top: 250px !important;
     }
+	.testimonials .slider-wrap {
+        max-width: 100% !important;
+    }
 }
 
 @media (max-width: 900px) {
