@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using YourDynastySite.Database.Contexts;
 using YourDynastySite.Database.Entities;
 
@@ -19,8 +20,17 @@ namespace YourDynastySite.Controllers
             return View();
         }
 
-        public async Task<IActionResult> EditForm(DynastyPerson person)
+        public async Task<IActionResult> EditForm()
         {
+            string uid = User.FindFirstValue(ClaimTypes.UserData);
+            if(!int.TryParse(uid, out int userId))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            User user = await _context.Users.FirstAsync(user => user.Id == userId);
+            DynastyPerson person = await _context.DynastyPersons.FirstAsync(p => p.Id == user.PersonId);
+
             if (person == null)
             {
                 return RedirectToAction("Index", "Home");
