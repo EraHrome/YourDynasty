@@ -20,7 +20,7 @@
 * http://ziamrurth-001-site1.ctempurl.com/
 
 # <a name="videodemo"></a>Видео демонстрация Функиональности
-* [Ссылка на видео](https://drive.google.com/)
+* [Ссылка на видео](https://disk.yandex.ru/i/JwfsCy2TWSYkgA)
 
 # <a name="about"></a>О проекте
 Задание от компании SCloud "Веб-сервис, который поможет любителям растений и огородникам добиться хорошего урожая"
