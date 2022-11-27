@@ -77,14 +77,14 @@ WHY CHOOSE ELASTIC
     <div class="container">
         <h3 class="testimonials wrapper">Изменить данные аккаунта:</h3>
         <p>Заполните дополнительную информацию о себе</p>
-        <form action="@Url.Action("Update", "Profile"))" class="comments-form">
+        <form action="@Url.Action("UpdateProfile", "Profile")" class="comments-form">
             <div class="multirow">
                 @Html.TextBoxFor(x => x.Name, new { placeholder = "Имя", @class = "input tripleline" })
                 @Html.TextBoxFor(x => x.Surname, new { placeholder = "Фамилия", @class = "input tripleline" })
                 @Html.TextBoxFor(x => x.MiddleName, new { placeholder = "Отчество", @class = "input tripleline" })
             </div>
             <div class="multirow">
-                @Html.TextBoxFor(x => x.BirthDate, new { placeholder = "Дата рождения", @class = "input doubleline" })
+                <input id="birthdate" type="date" name="birthdate" placeholder="Дата рождения" class="input doubleline" value="@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToString("yyyy-MM-dd") : string.Empty)">
                 @Html.TextBoxFor(x => x.BirthPlace, new { placeholder = "Место рождения", @class = "input doubleline" })
             </div>
             <div class="multirow">
@@ -96,7 +96,8 @@ WHY CHOOSE ELASTIC
             <input id="gender" type="number" name="gender" placeholder="Пол" class="input tripleline" value="@Model.Gender" min="0" max="1" step="1">
 
             <input name="Id" type="hidden" value="@Model.Id" />
-            <input id="form-memorial-submit" type="button" class="btn btn-default-green-fill" value="Сохранить">
+
+            <button style="margin-top:10px;" class="btn btn-default-green-fill" type="submit">Сохранить</button>
         </form>
     </div>
 </section>

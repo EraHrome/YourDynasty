@@ -36,6 +36,16 @@ namespace YourDynastySite.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            return View(person);
+        }
+
+        public async Task<IActionResult> UpdateProfile(DynastyPerson person)
+        {
+            if (person == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             DynastyPerson? dynastyPerson = await _context.DynastyPersons.FirstOrDefaultAsync(p => p.Id == p.Id);
             if (dynastyPerson == null)
             {
@@ -55,7 +65,7 @@ namespace YourDynastySite.Controllers
 
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("EditForm", "Profile");
         }
     }
 }

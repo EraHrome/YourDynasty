@@ -142,11 +142,11 @@
                                             <input id="surname" type="text" name="surname" placeholder="Отчество" class="input tripleline" value="@person.person?.Surname">
                                         </div>
                                         <div class="multirow">
-                                            <input id="birthdate" type="date" name="birthdate" placeholder="Дата рождения" class="input doubleline" value="@person.person?.BirthDate">
+                                            <input id="birthdate" type="date" name="birthdate" placeholder="Дата рождения" class="input doubleline" value="@(person.person?.BirthDate.HasValue ?? false ? person.person?.BirthDate.Value.ToString("yyyy-MM-dd") : string.Empty)">
                                             <input id="birthplace" type="text" name="birthplace" placeholder="Место рождения" class="input doubleline" value="@person.person?.BirthPlace">
                                         </div>
                                         <div class="multirow">
-                                            <input id="deathdate" type="date" name="deathdate" placeholder="Дата смерти" class="input tripleline" value="@person.person?.DeathDate">
+                                            <input id="deathdate" type="date" name="deathdate" placeholder="Дата смерти" class="input tripleline" value="@(person.person?.BirthDate.HasValue ?? false ? person.person?.BirthDate.Value.ToString("yyyy-MM-dd") : string.Empty)">
                                             <input id="burialregion" type="text" name="burialregion" placeholder="Регион захоронения" class="input tripleline" value="@person.person?.BurialRegion">
                                             <input id="burialplace" type="text" name="burialplace" placeholder="Место захоронения" class="input tripleline" value="@person.person?.BurialPlace">
                                         </div>
