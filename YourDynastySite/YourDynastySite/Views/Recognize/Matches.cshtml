@@ -85,88 +85,95 @@
                 <div class="wrap-blog">
 
                     <div class="row">
-                        <div class="col-md-12 col-lg-12 mb-80">
-                            <div class="heading comment">Мы нашли @response.Results.Count подходящих людей:</div>
-                            <div class="line"></div>
+                        @if (Model.Persons?.Any() ?? false)
+                        {
+                            <div class="col-md-12 col-lg-12 mb-80">
+                                <div class="heading comment">Мы нашли @response.Results.Count подходящих людей:</div>
+                                <div class="line"></div>
 
-                            @if (response != null)
-                            {
-                                @foreach (var person in Model.Persons)
+                                @if (response != null)
                                 {
-                                    <div class="media">
-                                        <img class="media-object" src="@($"data:image/png;base64, {person.face.ImageBase64}")" alt="photo">
-                                        <div class="media-body">
-                                            <h4 class="media-heading">@(person.person == null ? "Имя не найдено" : $"{person.person.Surname} {person.person.Name} {person.person.MiddleName}")</h4>
-                                            <div class="text-blog mt-0">
-                                                @if (person.person?.BirthDate.HasValue ?? false)
-                                                {
-                                                    string dateDescription = person.person?.DeathDate.HasValue ?? false
-                                                        ? $"{person.person?.BirthDate.Value.ToString("dd.MM.yyyy")} - {person.person?.DeathDate.Value.ToString("dd.MM.yyyy")}"
-                                                        : $"Дата рождения: {person.person?.BirthDate.Value.ToString("dd.MM.yyyy")}";
+                                    @foreach (var person in Model.Persons)
+                                    {
+                                        <div class="media">
+                                            <img class="media-object" src="@($"data:image/png;base64, {person.face.ImageBase64}")" alt="photo">
+                                            <div class="media-body">
+                                                <h4 class="media-heading">@(person.person == null ? "Имя не найдено" : $"{person.person.Surname} {person.person.Name} {person.person.MiddleName}")</h4>
+                                                <div class="text-blog mt-0">
+                                                    @if (person.person?.BirthDate.HasValue ?? false)
+                                                    {
+                                                        string dateDescription = person.person?.DeathDate.HasValue ?? false
+                                                            ? $"{person.person?.BirthDate.Value.ToString("dd.MM.yyyy")} - {person.person?.DeathDate.Value.ToString("dd.MM.yyyy")}"
+                                                            : $"Дата рождения: {person.person?.BirthDate.Value.ToString("dd.MM.yyyy")}";
 
-                                                    <span>@dateDescription</span>
-                                                }
-                                                @if (!string.IsNullOrEmpty(person.person?.BirthPlace))
-                                                {
-                                                    <span>@($"Место рождения: {person.person?.BirthPlace}")</span>
-                                                }
-                                                
-                                                <p class="overview-txt">
-                                                    @($"Вероятность совпадения: {string.Format("{0:0.###}", response.Results.FirstOrDefault(res => res.FaceUuid == Model.FaceId).Matches.FirstOrDefault(match => match.FaceUuid == person.face.Face.FaceUuid).Confidence)}")
-                                                </p>
-                                                <p class="overview-txt">
-                                                    @($"Предположительный возраст на фото: {person.face.Face.Tags.First(tag => tag.Name == "age").Value}")
-                                                </p>
+                                                        <span>@dateDescription</span>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(person.person?.BirthPlace))
+                                                    {
+                                                        <span>@($"Место рождения: {person.person?.BirthPlace}")</span>
+                                                    }
 
-                                                @if (person.person?.Id != null && person.person?.Id != new Guid())
-                                                {
-                                                    <p class="overview-txt">@($"Id человека: {person.person.Id}")</p>
-                                                }
+                                                    <p class="overview-txt">
+                                                        @($"Вероятность совпадения: {string.Format("{0:0.0%}", response?.Results?.FirstOrDefault(res => res.FaceUuid == Model.FaceId)?.Matches?.FirstOrDefault(match => match.FaceUuid == person.face.Face.FaceUuid)?.Confidence ?? 0)}")
+                                                    </p>
+                                                    <p class="overview-txt">
+                                                        @($"Предположительный возраст на фото: {person.face.Face.Tags.First(tag => tag.Name == "age").Value}")
+                                                    </p>
+
+                                                    @if (person.person?.Id != null && person.person?.Id != new Guid())
+                                                    {
+                                                        <p class="overview-txt">@($"Id человека: {person.person.Id}")</p>
+                                                    }
+                                                </div>
+                                                <div class="multirow-auto">
+                                                    @*<a class="goto-link" href=""> <div style="max-width: 250px" class="btn-listing btn-default-green-fill">На древо</div></a>*@
+                                                    @if (!string.IsNullOrEmpty(person.person?.SourceLink))
+                                                    {
+                                                        <a class="goto-link" href="https://obd-memorial.ru/html/info.htm?id=5420874"> <div class="btn-listing btn-default-green-fill">Источник</div></a>
+                                                    }
+                                                    <div style="max-width: 100px" class="btn-listing btn-default-green-fill" person-form-btn="@person.face.Face.FaceUuid">Дополнить</div>
+                                                </div>
                                             </div>
-                                            <div class="multirow-auto">
-                                                @*<a class="goto-link" href=""> <div style="max-width: 250px" class="btn-listing btn-default-green-fill">На древо</div></a>*@
-                                                @if (!string.IsNullOrEmpty(person.person?.SourceLink))
-                                                {
-                                                    <a class="goto-link" href="https://obd-memorial.ru/html/info.htm?id=5420874"> <div class="btn-listing btn-default-green-fill">Источник</div></a>
-                                                }
-                                                <div style="max-width: 100px" class="btn-listing btn-default-green-fill" person-form-btn="@person.face.Face.FaceUuid">Дополнить</div>
+                                        </div>
+
+                                        <hr>
+                                        <form class="comments-form" person-additional-form="@person.face.Face.FaceUuid" action="@Url.Action("AddPerson", "Recognize")" hidden>
+                                            <div class="multirow">
+                                                <input id="middlename" type="text" name="middlename" placeholder="Фамилия" class="input tripleline" value="@person.person?.MiddleName">
+                                                <input id="name" type="text" name="name" placeholder="Имя" class="input tripleline" value="@person.person?.Name">
+                                                <input id="surname" type="text" name="surname" placeholder="Отчество" class="input tripleline" value="@person.person?.Surname">
                                             </div>
-                                        </div>
-                                    </div>
+                                            <div class="multirow">
+                                                <input id="birthdate" type="date" name="birthdate" placeholder="Дата рождения" class="input doubleline" value="@(person.person?.BirthDate.HasValue ?? false ? person.person?.BirthDate.Value.ToString("yyyy-MM-dd") : string.Empty)">
+                                                <input id="birthplace" type="text" name="birthplace" placeholder="Место рождения" class="input doubleline" value="@person.person?.BirthPlace">
+                                            </div>
+                                            <div class="multirow">
+                                                <input id="deathdate" type="date" name="deathdate" placeholder="Дата смерти" class="input tripleline" value="@(person.person?.BirthDate.HasValue ?? false ? person.person?.BirthDate.Value.ToString("yyyy-MM-dd") : string.Empty)">
+                                                <input id="burialregion" type="text" name="burialregion" placeholder="Регион захоронения" class="input tripleline" value="@person.person?.BurialRegion">
+                                                <input id="burialplace" type="text" name="burialplace" placeholder="Место захоронения" class="input tripleline" value="@person.person?.BurialPlace">
+                                            </div>
 
-                                    <hr>
-                                    <form class="comments-form" person-additional-form="@person.face.Face.FaceUuid" action="@Url.Action("AddPerson", "Recognize")" hidden>
-                                        <div class="multirow">
-                                            <input id="middlename" type="text" name="middlename" placeholder="Фамилия" class="input tripleline" value="@person.person?.MiddleName">
-                                            <input id="name" type="text" name="name" placeholder="Имя" class="input tripleline" value="@person.person?.Name">
-                                            <input id="surname" type="text" name="surname" placeholder="Отчество" class="input tripleline" value="@person.person?.Surname">
-                                        </div>
-                                        <div class="multirow">
-                                            <input id="birthdate" type="date" name="birthdate" placeholder="Дата рождения" class="input doubleline" value="@(person.person?.BirthDate.HasValue ?? false ? person.person?.BirthDate.Value.ToString("yyyy-MM-dd") : string.Empty)">
-                                            <input id="birthplace" type="text" name="birthplace" placeholder="Место рождения" class="input doubleline" value="@person.person?.BirthPlace">
-                                        </div>
-                                        <div class="multirow">
-                                            <input id="deathdate" type="date" name="deathdate" placeholder="Дата смерти" class="input tripleline" value="@(person.person?.BirthDate.HasValue ?? false ? person.person?.BirthDate.Value.ToString("yyyy-MM-dd") : string.Empty)">
-                                            <input id="burialregion" type="text" name="burialregion" placeholder="Регион захоронения" class="input tripleline" value="@person.person?.BurialRegion">
-                                            <input id="burialplace" type="text" name="burialplace" placeholder="Место захоронения" class="input tripleline" value="@person.person?.BurialPlace">
-                                        </div>
-                                        
-                                        <div>
-                                            <input id="gender" type="number" name="gender" placeholder="Пол" class="input tripleline" value="@person.person?.Gender" min="0" max="1" step="1">
-                                            <input id="motherid" type="text" name="motherid" placeholder="Id матери" class="input tripleline" value="@person.person?.MotherId">
-                                            <input id="fatherid" type="text" name="fatherid" placeholder="Id отца" class="input tripleline" value="@person.person?.FatherId">
-                                            <input id="partnerid" type="text" name="partnerid" placeholder="Id партнера" class="input tripleline" value="@person.person?.PartnerId">
-                                        </div>
+                                            <div>
+                                                <input id="gender" type="number" name="gender" placeholder="Пол" class="input tripleline" value="@person.person?.Gender" min="0" max="1" step="1">
+                                                <input id="motherid" type="text" name="motherid" placeholder="Id матери" class="input tripleline" value="@person.person?.MotherId">
+                                                <input id="fatherid" type="text" name="fatherid" placeholder="Id отца" class="input tripleline" value="@person.person?.FatherId">
+                                                <input id="partnerid" type="text" name="partnerid" placeholder="Id партнера" class="input tripleline" value="@person.person?.PartnerId">
+                                            </div>
 
-                                        <input id="id" type="hidden" name="id" value="@person.person?.Id">
-                                        <input id="faceid" type="hidden" name="faceid" value="@person.face.Face.FaceUuid">
+                                            <input id="id" type="hidden" name="id" value="@person.person?.Id">
+                                            <input id="faceid" type="hidden" name="faceid" value="@person.face.Face.FaceUuid">
 
-                                        <input id="form-submit" type="submit" style="max-width: 125px" class="btn-listing btn-default-green-fill" value="Сохранить">
-                                    </form>
+                                            <input id="form-submit" type="submit" style="max-width: 125px" class="btn-listing btn-default-green-fill" value="Сохранить">
+                                        </form>
+                                    }
                                 }
-                            }
-                            @*<a href="" class="btn btn-default-green-fill">Загрузить еще</a>*@
-                        </div>
+                                @*<a href="" class="btn btn-default-green-fill">Загрузить еще</a>*@
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="heading comment">Мы нашли не нашли подходящих людей</div>
+                        }
                     </div>
                 </div>
             </div>

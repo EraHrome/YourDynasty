@@ -74,18 +74,19 @@ namespace YourDynastySite.Controllers
         public async Task<IActionResult> Matches(Guid faceId)
         {
             Recognize recognize;
+            MatchesResultModel viewModel = new();
             try
             {
                 recognize = await _dynastyService.Recognize(new List<Guid>() { faceId }, new List<string>() { $"{_allNames}@{_dbName}" });
             }
             catch (Exception ex)
             {
-                return RedirectToAction(nameof(AddPerson), faceId);
+                return View(viewModel);
             }
 
             if (recognize?.Results == null || recognize.Results.Count == 0)
             {
-                return RedirectToAction(nameof(AddPerson));
+                return View(viewModel);
             }
 
             List<Guid> facesIds = recognize.Results.Where(recognize => recognize.FaceUuid.HasValue && recognize.FaceUuid == faceId)
@@ -99,7 +100,7 @@ namespace YourDynastySite.Controllers
                 persons.Add((croppedFace, person));
             }
 
-            MatchesResultModel viewModel = new MatchesResultModel()
+            viewModel = new ()
             {
                 FaceId = faceId,
                 Recognize = recognize,
