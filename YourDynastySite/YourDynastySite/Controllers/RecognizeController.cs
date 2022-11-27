@@ -1,6 +1,8 @@
 ﻿using IO.Swagger.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using YourDynastySite.Database.Contexts;
 using YourDynastySite.Database.Entities;
 using YourDynastySite.Models;
@@ -145,14 +147,31 @@ namespace YourDynastySite.Controllers
             return RedirectToAction(nameof(Matches), new { faceId = person.FaceId });
         }
 
-        public async Task<IActionResult> GenealogyTree(Guid personId)
+        public async Task<IActionResult> GenealogyTree()
+        {
+            string uid = User.FindFirstValue(ClaimTypes.UserData);
+            if (!int.TryParse(uid, out int userId))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            User user = await _context.Users.FirstAsync(user => user.Id == userId);
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("GenealogyTreeById", "Recognize", new { personId = user.PersonId });
+        }
+
+        public async Task<IActionResult> GenealogyTreeById(Guid personId)
         {
             GenealogyTreeModel viewModel = new()
             {
                 Persons = new()
             };
             var res = await GetPersonTree(viewModel, personId);
-            return View(res);
+            return View("GenealogyTree", res);
         }
 
         public async Task<GenealogyTreeModel> GetPersonTree(GenealogyTreeModel treeModel, Guid personId)
@@ -162,8 +181,22 @@ namespace YourDynastySite.Controllers
             {
                 return treeModel;
             }
-            treeModel.Persons.Add(person);
-            var existingIds = treeModel.Persons.Select(x => x.Id);
+
+            DynastyPersonWithImage personWithImage = new()
+            {
+                Person = person
+            };
+            if (person.FaceId.HasValue)
+            {
+                CroppedFace croppedFace = await _dynastyService.GetCroppedFace(person.FaceId.Value);
+                if (croppedFace != null)
+                {
+                    personWithImage.Image = croppedFace.ImageBase64;
+                }
+            }
+
+            treeModel.Persons.Add(personWithImage);
+            var existingIds = treeModel.Persons.Select(x => x.Person.Id);
             if (person.PartnerId.HasValue && !existingIds.Any(x => existingIds.Contains(person.PartnerId.Value)))
             {
                 var partners = await GetPersonTree(treeModel, person.PartnerId.Value);
@@ -179,10 +212,10 @@ namespace YourDynastySite.Controllers
                 var fatherTree = await GetPersonTree(treeModel, person.FatherId.Value);
                 treeModel.Persons.AddRange(fatherTree.Persons);
             }
-            var persons = new List<DynastyPerson>();
+            var persons = new List<DynastyPersonWithImage>();
             foreach (var pers in treeModel.Persons)
             {
-                if (!persons.Any(x => x.Id == pers.Id))
+                if (!persons.Any(x => x.Person.Id == pers.Person.Id))
                 {
                     persons.Add(pers);
                 }

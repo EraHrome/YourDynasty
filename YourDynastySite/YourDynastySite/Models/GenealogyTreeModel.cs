@@ -4,6 +4,12 @@ namespace YourDynastySite.Models
 {
     public class GenealogyTreeModel
     {
-        public List<DynastyPerson> Persons { get; set; }
+        public List<DynastyPersonWithImage> Persons { get; set; }
+    }
+
+    public class DynastyPersonWithImage
+    {
+        public DynastyPerson Person { get; set; }
+        public string Image { get; set; }
     }
 }

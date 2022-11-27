@@ -1,4 +1,4 @@
-﻿@model GenealogyTreeModel
+@model GenealogyTreeModel
 
 @{
     ViewData["Title"] = "Recognize Page";
@@ -227,7 +227,8 @@
         var family = new FamilyTree(document.getElementById("tree"), {
             template: "main",
             scaleInitial: FamilyTree.match.boundary,
-            mouseScrool: FamilyTree.action.zoom,
+            mouseScrool: FamilyTree.action.ctrlZoom,
+            miniMap: true,
             nodeMenu: {
                 details: { text: "Details" }
             },
@@ -304,7 +305,7 @@
             @foreach (var person in Model.Persons)
             {
                 <text>
-                    { id: '@person.Id', pids: ['@person.PartnerId'], mid: '@person.MotherId', fid: '@person.FatherId', gender: '@(person.Gender == 0 ? "male" : "female")', name: "@person.Name", img: "https://cdn.balkan.app/shared/m60/1.jpg" },
+                       { id: '@person.Person.Id', pids: ['@person.Person.PartnerId'], mid: '@person.Person.MotherId', fid: '@person.Person.FatherId', gender: '@(person.Person.Gender == 0 ? "male" : "female")', name: '@($"{person.Person.Surname} {person.Person.Name} {person.Person.MiddleName}")', img: "@(string.IsNullOrEmpty(person.Image) ? "https://cdn.balkan.app/shared/m60/1.jpg" : $"data:image/png;base64, {person.Image}")" },
                 </text>
             }
         ]);
