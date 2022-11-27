@@ -305,7 +305,7 @@
             @foreach (var person in Model.Persons)
             {
                 <text>
-                       { id: '@person.Person.Id', pids: ['@person.Person.PartnerId'], mid: '@person.Person.MotherId', fid: '@person.Person.FatherId', gender: '@(person.Person.Gender == 0 ? "male" : "female")', name: '@($"{person.Person.Surname} {person.Person.Name} {person.Person.MiddleName}")', img: "@(string.IsNullOrEmpty(person.Image) ? "https://cdn.balkan.app/shared/m60/1.jpg" : $"data:image/png;base64, {person.Image}")" },
+                       { id: '@person.Person.Id', pids: ['@person.Person.PartnerId'], mid: '@person.Person.MotherId', fid: '@person.Person.FatherId', gender: '@(person.Person.Gender == 0 ? "male" : "female")', name: '@Html.Raw($"{person.Person.Surname} {person.Person.Name} {person.Person.MiddleName}")', img: "@(string.IsNullOrEmpty(person.Image) ? "https://cdn.balkan.app/shared/m60/1.jpg" : $"data:image/png;base64, {person.Image}")" },
                 </text>
             }
         ]);
