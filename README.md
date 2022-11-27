@@ -2,7 +2,7 @@
 Проект для хакатона Tulahack 2022.
 
 
-<img src="YourDynastySite/YourDynastySite/wwwroot/img" align="right" />
+<img src="YourDynastySite/YourDynastySite/wwwroot/img/logo.png" align="right" />
 
 # MVP Проекта "Твоя династия" - агрегатор данных из открытых банков для поиска людей по фото или текстовому описанию
 
